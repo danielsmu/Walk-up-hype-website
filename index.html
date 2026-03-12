@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI-powered announcements and walk-up music for youth baseball &amp; softball. Built for the field." />
+  <title>Walk-Up Hype — AI Announcements for Youth Baseball &amp; Softball</title>
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ===================== HERO ===================== -->
+  <section id="hero">
+    <div class="hero-inner">
+      <img src="assets/icon.png" alt="Walk-Up Hype app icon" class="hero-icon" onerror="this.style.display='none'" />
+      <h1 class="hero-headline">
+        YOUR KID'S WALK-UP,<br />
+        <span class="gold">DONE RIGHT.</span>
+      </h1>
+      <p class="hero-subhead">
+        AI-powered announcements and walk-up music for youth baseball &amp; softball.<br class="desktop-br" /> Built for the field.
+      </p>
+
+      <!-- Pre-launch email capture -->
+      <form class="email-capture" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <input
+          type="email"
+          name="email"
+          placeholder="Enter your email"
+          required
+          aria-label="Email address"
+        />
+        <button type="submit" class="btn-primary">Notify Me</button>
+      </form>
+
+      <p class="hero-footnote">Free to start &middot; Premium $9.99/year</p>
+    </div>
+  </section>
+
+  <!-- ===================== VOICE DEMO ===================== -->
+  <section id="demo">
+    <div class="section-inner">
+      <p class="section-label">HEAR THE DIFFERENCE</p>
+      <div class="demo-cards">
+
+        <!-- Free card -->
+        <div class="demo-card">
+          <span class="demo-tier">Free</span>
+          <button class="play-btn" aria-label="Play free tier demo" data-audio="assets/demo-free.mp3">
+            <span class="play-icon">&#9654;</span>
+          </button>
+          <div class="waveform" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p class="demo-desc">Standard text-to-speech voice</p>
+        </div>
+
+        <!-- Premium card -->
+        <div class="demo-card demo-card--premium">
+          <span class="demo-tier">Premium AI</span>
+          <button class="play-btn" aria-label="Play premium AI demo" data-audio="assets/demo-premium.mp3">
+            <span class="play-icon">&#9654;</span>
+          </button>
+          <div class="waveform" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+          </div>
+          <p class="demo-desc">Stadium-quality AI play-by-play announcer</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FEATURES ===================== -->
+  <section id="features">
+    <div class="section-inner">
+      <p class="section-label">FEATURES</p>
+      <div class="features-grid">
+
+        <div class="feature-card">
+          <span class="feature-icon">🎙️</span>
+          <h3>AI Announcer Voice</h3>
+          <p>Stadium-quality play-by-play for every player</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🎵</span>
+          <h3>Walk-Up Music</h3>
+          <p>Apple Music integration — any song, fades on cue</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">⚾</span>
+          <h3>Game Mode</h3>
+          <p>One tap starts the show. Built for chaotic dugouts.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">👨‍👩‍👧</span>
+          <h3>Multiple Teams</h3>
+          <p>Manage every kid, every team, one app</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">📴</span>
+          <h3>Works Offline</h3>
+          <p>Voices cached on device. No signal? No problem.</p>
+        </div>
+
+        <div class="feature-card">
+          <span class="feature-icon">🆓</span>
+          <h3>Free to Start</h3>
+          <p>Try it today. Upgrade when you hear the difference.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== HOW IT WORKS ===================== -->
+  <section id="how">
+    <div class="section-inner">
+      <p class="section-label">HOW IT WORKS</p>
+      <div class="steps">
+
+        <div class="step">
+          <span class="step-number">1</span>
+          <h3>Add your players</h3>
+          <p>Name, number, position. Takes 30 seconds.</p>
+        </div>
+
+        <div class="step-divider" aria-hidden="true"></div>
+
+        <div class="step">
+          <span class="step-number">2</span>
+          <h3>Pick their song</h3>
+          <p>Search Apple Music. Any walk-up song, any player.</p>
+        </div>
+
+        <div class="step-divider" aria-hidden="true"></div>
+
+        <div class="step">
+          <span class="step-number">3</span>
+          <h3>Hit Game Mode</h3>
+          <p>Tap a player, the announcement plays, music fades in. Done.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRICING ===================== -->
+  <section id="pricing">
+    <div class="section-inner">
+      <p class="section-label">PRICING</p>
+      <div class="pricing-cards">
+
+        <!-- Free -->
+        <div class="pricing-card">
+          <h3 class="pricing-tier">Free</h3>
+          <p class="pricing-price">$0 <span>forever</span></p>
+          <ul class="pricing-features">
+            <li>AVSpeechSynthesizer voice</li>
+            <li>1 team, up to 15 players</li>
+            <li>Walk-up music</li>
+            <li>Game Mode</li>
+            <li>Free forever</li>
+          </ul>
+          <a href="#hero" class="btn-secondary" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'}); return false;">Get Started Free</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="pricing-card pricing-card--premium">
+          <h3 class="pricing-tier">Premium</h3>
+          <p class="pricing-price">$9.99 <span>/ year</span></p>
+          <ul class="pricing-features">
+            <li><span class="gold">✦</span> AI announcer voice</li>
+            <li><span class="gold">✦</span> Unlimited teams &amp; players</li>
+            <li><span class="gold">✦</span> Ad-free</li>
+            <li><span class="gold">✦</span> Priority support</li>
+          </ul>
+          <a href="#hero" class="btn-primary" onclick="document.getElementById('hero').scrollIntoView({behavior:'smooth'}); return false;">Get Premium</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer id="footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <img src="assets/icon.png" alt="Walk-Up Hype" class="footer-icon" onerror="this.style.display='none'" />
+        <span class="footer-wordmark">Walk-Up Hype</span>
+      </div>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="privacy.html">Privacy Policy</a>
+        <span aria-hidden="true">&middot;</span>
+        <a href="terms.html">Terms of Use</a>
+      </nav>
+      <p class="footer-legal">
+        &copy; 2026 Walk-Up Hype LLC. Not affiliated with MLB, Apple, or Spotify.
+      </p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
