@@ -120,64 +120,68 @@ a:hover {
    HERO
    ============================================================ */
 #hero {
-  min-height: 100svh;
   background: var(--black);
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 24px;
+  padding: 64px 24px;
 }
 
 .hero-inner {
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 40px;
+  max-width: var(--max-w);
+  width: 100%;
+}
+
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
-  max-width: 720px;
 }
 
 .hero-icon {
-  width: 80px;
-  height: 80px;
-  border-radius: 18px;
-  margin-bottom: 28px;
+  width: 72px;
+  height: 72px;
+  border-radius: 16px;
+  margin-bottom: 24px;
   object-fit: cover;
 }
 
 .hero-headline {
-  font-size: clamp(40px, 10vw, 72px);
+  font-size: clamp(36px, 9vw, 64px);
   font-weight: 900;
   line-height: 1.05;
   letter-spacing: -0.02em;
   color: var(--white);
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .hero-subhead {
-  font-size: clamp(16px, 2.5vw, 18px);
+  font-size: clamp(15px, 2.5vw, 18px);
   font-weight: 400;
   color: var(--gray);
-  margin-bottom: 36px;
-  max-width: 540px;
+  margin-bottom: 32px;
+  max-width: 440px;
 }
 
 .hero-footnote {
   font-size: 13px;
   color: var(--gray);
+  margin-top: 12px;
 }
 
-/* ============================================================
-   PROMO VIDEO
-   ============================================================ */
-#promo {
-  background: var(--black);
+.hero-video-wrap {
+  width: 100%;
+  max-width: 420px;
 }
 
 .promo-video {
   width: 100%;
-  max-width: 800px;
   display: block;
-  margin: 0 auto;
   border-radius: 16px;
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
 }
@@ -393,17 +397,6 @@ a:hover {
    RESPONSIVE — ≥ 768px (2-col grids, side-by-side cards)
    ============================================================ */
 @media (min-width: 768px) {
-  .desktop-br { display: block; }
-
-  .demo-cards {
-    flex-direction: row;
-    max-width: 100%;
-  }
-
-  .demo-card {
-    flex: 1;
-  }
-
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -416,7 +409,37 @@ a:hover {
   .pricing-card {
     flex: 1;
   }
+}
 
+/* ============================================================
+   RESPONSIVE — ≥ 900px (hero side-by-side)
+   ============================================================ */
+@media (min-width: 900px) {
+  #hero {
+    padding: 80px 40px;
+  }
+
+  .hero-inner {
+    flex-direction: row;
+    align-items: center;
+    gap: 60px;
+  }
+
+  .hero-text {
+    align-items: flex-start;
+    text-align: left;
+    flex: 1;
+  }
+
+  .hero-subhead {
+    max-width: 100%;
+  }
+
+  .hero-video-wrap {
+    flex: 0 0 auto;
+    width: 45%;
+    max-width: 520px;
+  }
 }
 
 /* ============================================================
@@ -428,10 +451,6 @@ a:hover {
   }
 
   .section-inner {
-    padding: 100px 40px;
-  }
-
-  #hero {
     padding: 100px 40px;
   }
 }
