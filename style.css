@@ -175,6 +175,7 @@ a:hover {
 }
 
 .hero-video-wrap {
+  position: relative;
   width: 100%;
   max-width: 420px;
 }
@@ -184,6 +185,29 @@ a:hover {
   display: block;
   border-radius: 16px;
   box-shadow: 0 12px 48px rgba(0, 0, 0, 0.5);
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.video-sound-btn {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 999px;
+  padding: 6px 12px;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--white);
+  line-height: 1;
+  transition: background 0.2s;
+}
+
+.video-sound-btn:hover {
+  background: rgba(0, 0, 0, 0.8);
 }
 
 /* ============================================================
@@ -439,6 +463,10 @@ a:hover {
     flex: 0 0 auto;
     width: 45%;
     max-width: 520px;
+  }
+
+  .promo-video {
+    max-height: none;
   }
 }
 

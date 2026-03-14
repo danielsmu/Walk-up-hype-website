@@ -29,9 +29,10 @@
         <p class="hero-footnote">7-day free trial &middot; $9.99/year &middot; free tier always available</p>
       </div>
       <div class="hero-video-wrap">
-        <video class="promo-video" controls preload="metadata" playsinline poster="assets/promo-poster.jpg">
+        <video class="promo-video" autoplay muted loop playsinline poster="assets/promo-poster.jpg">
           <source src="assets/promo.mp4" type="video/mp4" />
         </video>
+        <button class="video-sound-btn" aria-label="Toggle sound">🔇</button>
       </div>
     </div>
   </section>
@@ -155,6 +156,18 @@
     </div>
   </footer>
 
+
+  <script>
+    (function () {
+      var vid = document.querySelector('.promo-video');
+      var btn = document.querySelector('.video-sound-btn');
+      if (!vid || !btn) return;
+      btn.addEventListener('click', function () {
+        vid.muted = !vid.muted;
+        btn.innerHTML = vid.muted ? '🔇' : '🔊';
+      });
+    })();
+  </script>
 
 </body>
 </html>
