@@ -84,20 +84,4 @@
     });
   });
 
-  /* ---- Form: simple feedback on submit ---- */
-  var form = document.querySelector('.email-capture');
-  if (form) {
-    form.addEventListener('submit', function (e) {
-      /* If Formspree ID is still placeholder, intercept and show message */
-      if (form.action.includes('YOUR_FORM_ID')) {
-        e.preventDefault();
-        var btn = form.querySelector('button[type="submit"]');
-        btn.textContent = 'Thanks! We\'ll be in touch.';
-        btn.disabled = true;
-        btn.style.opacity = '0.7';
-      }
-      /* Otherwise let Formspree handle the POST normally */
-    });
-  }
-
 })();
