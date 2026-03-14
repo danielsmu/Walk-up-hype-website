@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Walk-Up Hype</title>
+  <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .legal-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 80px 24px;
+    }
+    .legal-inner h1 {
+      font-size: 36px;
+      font-weight: 900;
+      margin-bottom: 8px;
+    }
+    .legal-inner .updated {
+      font-size: 13px;
+      color: var(--gray);
+      margin-bottom: 48px;
+    }
+    .legal-inner h2 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--white);
+      margin: 36px 0 10px;
+    }
+    .legal-inner p, .legal-inner li {
+      font-size: 15px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+    .legal-inner ul {
+      padding-left: 20px;
+      margin: 8px 0;
+    }
+    .legal-inner li {
+      margin-bottom: 4px;
+    }
+    .legal-inner a {
+      color: var(--gold);
+    }
+    .back-link {
+      display: inline-block;
+      font-size: 14px;
+      color: var(--gold);
+      margin-bottom: 40px;
+    }
+  </style>
+</head>
+<body>
+  <div class="legal-inner">
+    <a href="/" class="back-link">&larr; Walk-Up Hype</a>
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: March 2026</p>
+
+    <p>Walk-Up Hype ("we," "our," or "us") is committed to protecting your privacy. This policy explains what data Walk-Up Hype collects, how it is used, and your choices.</p>
+
+    <h2>Data Stored on Your Device</h2>
+    <p>All team, player, and game data you enter into Walk-Up Hype is stored locally on your device using Apple's SwiftData framework. This data includes player names, jersey numbers, positions, walk-up song selections, and announcement preferences. We do not have access to this data and it is never transmitted to our servers.</p>
+
+    <h2>Data We Collect</h2>
+    <p>Walk-Up Hype collects minimal data to operate the app:</p>
+    <ul>
+      <li><strong>Announcement text</strong> — When you use the Premium AI voice, the announcement script (e.g., "Now batting, number 7, Jake Callahan") is sent to our secure voice generation proxy to produce audio. This text is not stored after the audio is generated.</li>
+      <li><strong>Subscription token</strong> — A cryptographic token from your App Store subscription is sent with voice generation requests solely to verify your Premium entitlement. We do not receive or store your Apple ID or payment information.</li>
+    </ul>
+
+    <h2>Data We Do Not Collect</h2>
+    <ul>
+      <li>We do not collect your name, email address, or any personal contact information.</li>
+      <li>We do not collect analytics or usage telemetry.</li>
+      <li>We do not use advertising SDKs or track you across apps.</li>
+      <li>We do not sell data to third parties.</li>
+    </ul>
+
+    <h2>Apple Music</h2>
+    <p>Walk-Up Hype uses Apple's MusicKit and MediaPlayer frameworks to let you select walk-up songs and play between-innings playlists from your Apple Music library. We do not access, store, or transmit your music library data. All music playback is handled directly by Apple's frameworks on your device.</p>
+
+    <h2>In-App Purchases</h2>
+    <p>Premium subscriptions are processed entirely by Apple through StoreKit. We do not receive or store your payment information. Your subscription status is verified through Apple's transaction receipts.</p>
+
+    <h2>Third-Party Services</h2>
+    <p>Walk-Up Hype's premium voice feature routes requests through a Cloudflare Worker proxy, which calls Fish Audio's text-to-speech API. The proxy does not log or store announcement content. Fish Audio's privacy policy is available at their website.</p>
+    <p>The free-tier voice uses Microsoft Edge TTS. Announcement scripts are sent to Microsoft's service to generate audio. Please refer to Microsoft's privacy policy for details.</p>
+
+    <h2>Children's Privacy</h2>
+    <p>Walk-Up Hype is designed for use by coaches and parents. We do not knowingly collect personal information from children under 13. Player names entered into the app are stored only on your device and never transmitted to us.</p>
+
+    <h2>Data Retention</h2>
+    <p>All app data is stored on your device and is deleted when you uninstall the app. Generated voice audio files are cached on your device and can be cleared through your device settings.</p>
+
+    <h2>Contact</h2>
+    <p>If you have questions about this privacy policy, contact us at <a href="mailto:support@walkuphype.com">support@walkuphype.com</a>.</p>
+  </div>
+</body>
+</html>
