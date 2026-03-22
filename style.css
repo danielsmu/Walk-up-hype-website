@@ -187,23 +187,19 @@ a:hover {
   position: relative;
   width: 100%;
   max-width: 340px;
-  /* Reserve space at the phone's native portrait ratio so the
-     container never collapses while the video is loading */
-  aspect-ratio: 9 / 19.5;
   border-radius: 20px;
-  overflow: hidden;
-  background: #111;
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+  /* background shows while video loads */
+  background: #111;
 }
 
 .promo-video {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
+  /* Block-level, natural flow — avoids iOS Safari autoplay
+     bug triggered by position:absolute inside overflow:hidden */
   display: block;
+  width: 100%;
+  height: auto;
   border-radius: 20px;
-  object-fit: cover;
 }
 
 .video-sound-btn {
@@ -480,8 +476,6 @@ a:hover {
     flex: 0 0 auto;
     width: 320px;
     max-width: 360px;
-    /* On desktop the video fills the aspect-ratio container naturally */
-    aspect-ratio: 9 / 19.5;
   }
 }
 
