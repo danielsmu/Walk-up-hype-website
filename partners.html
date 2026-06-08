@@ -529,25 +529,28 @@
       <div class="feature">
         <div class="feature-icon">🎙️</div>
         <div class="feature-text">
-          <strong>Neural PA Announcer Voice</strong>
-          <span>Choose from Big League Bill, Play by Play Pete, Dugout Donna, and more.
-            Each player gets their own intro.</span>
+          <strong>Stadium-Quality PA Announcer Voices</strong>
+          <span>Choose from Big League Bill, Play by Play Pete, Ringside Randy, Dugout Donna,
+            and Coach Carlos. Each player gets their own personalized intro -- name, number,
+            position, nickname. Sounds like the real thing.</span>
         </div>
       </div>
       <div class="feature">
         <div class="feature-icon">🎵</div>
         <div class="feature-text">
-          <strong>Walk-Up Music</strong>
-          <span>Any song from Apple Music. Plays automatically with the announcement
-            when a player steps up to bat.</span>
+          <strong>Walk-Up Music from Apple Music or Your Library</strong>
+          <span>Any song from Apple Music, or pick straight from the music already on your
+            phone. Set the exact start point. The announcement fires first, then the
+            music kicks in automatically.</span>
         </div>
       </div>
       <div class="feature">
         <div class="feature-icon">⚾</div>
         <div class="feature-text">
-          <strong>Live Game Mode</strong>
-          <span>Coaches run it from the dugout. Tap a player's name, the announcement
-            plays, the music kicks in. Big-league experience for youth players.</span>
+          <strong>Game Mode -- Built for the Dugout</strong>
+          <span>Coach taps a player's name, announcement plays, music starts. That's it.
+            Works offline, survives bad cell service, runs on one phone.
+            Every kid gets their big-league moment.</span>
         </div>
       </div>
     </div>
@@ -564,11 +567,11 @@
       >
       <div class="alert" id="formError" style="display:none;"></div>
       <button class="btn-claim" id="claimBtn" onclick="submitClaim()">
-        Claim Free Access
+        Get My Free Access
       </button>
       <p class="fine-print">
-        60 days of free premium access. No credit card required.
-        No auto-renew. Access expires at end of season.
+        60 days free. No credit card. No auto-renew.
+        Access expires at end of season -- no surprise charges.
       </p>
     </div>
   </div>
@@ -595,8 +598,7 @@
       </button>
     </div>
     <p class="waitlist-note">
-      You can also download Walk-Up Hype for free and try the basic version
-      while you wait.
+      You can still download Walk-Up Hype and use the free tier while you wait.
       <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910">Download here</a>
     </p>
   </div>
@@ -606,7 +608,7 @@
     <div style="text-align:center;padding:40px 0;">
       <div style="font-size:48px;margin-bottom:16px;">✅</div>
       <h1 style="font-size:24px;margin-bottom:12px;">You're on the list</h1>
-      <p style="color:var(--gray);font-size:15px;">We'll email you if more codes become available.</p>
+      <p style="color:var(--gray);font-size:15px;">We'll email you if more codes open up.</p>
     </div>
   </div>
 
@@ -614,7 +616,7 @@
   <div class="state" id="stateSuccess">
     <div style="text-align:center;margin-bottom:24px;">
       <div style="font-size:48px;margin-bottom:12px;">🎉</div>
-      <h1 style="font-size:28px;margin-bottom:8px;">You're in!</h1>
+      <h1 style="font-size:28px;margin-bottom:8px;">Your kid's getting a walk-up.</h1>
       <p style="color:var(--gray);font-size:15px;" id="successSubhead">
         Your code is below. We also emailed it to you.
       </p>
@@ -647,7 +649,7 @@
       <div class="step">
         <div class="step-num">3</div>
         <div class="step-text">
-          Enter the code above and enjoy the season
+          Enter the code above and your kid walks up like a pro
         </div>
       </div>
     </div>
@@ -757,8 +759,12 @@
     // Subhead
     if (t.directorName) {
       document.getElementById("subhead").textContent =
-        `${t.directorName} has set up free premium access for ${leagueName} players. ` +
-        `No credit card. No auto-renew. Expires after the season.`;
+        `${t.directorName} is giving ${leagueName} players free premium access this summer. ` +
+        `No credit card. No auto-renew. Just a big-league experience for every kid on the roster.`;
+    } else {
+      document.getElementById("subhead").textContent =
+        `${leagueName} is giving their players free premium access this summer. ` +
+        `No credit card. No auto-renew. Just a big-league experience for every kid on the roster.`;
     }
 
     // Custom message
