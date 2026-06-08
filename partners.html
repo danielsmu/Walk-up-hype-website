@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Walk-Up Hype Access — League Promo</title>
+  <meta name="description" content="Claim your free premium access to Walk-Up Hype — PA announcer introductions and walk-up music for youth baseball and softball players.">
+  <!-- Prevent indexing of promo pages -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="/assets/icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ── Tokens ─────────────────────────────────────────────────────── */
+    :root {
+      --black:  #000000;
+      --navy:   #1C1C1E;
+      --card:   #2C2C2E;
+      --gold:   #F5A623;
+      --red:    #CC0000;
+      --white:  #FFFFFF;
+      --gray:   #8E8E93;
+      --lgray:  #636366;
+      --radius: 16px;
+      --font:   'Inter', system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+    }
+
+    a { color: var(--gold); text-decoration: none; }
+    a:hover { opacity: 0.8; }
+    img { display: block; max-width: 100%; }
+
+    /* ── Layout ─────────────────────────────────────────────────────── */
+    .page {
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+
+    /* ── Sample badge ───────────────────────────────────────────────── */
+    .sample-badge {
+      display: none;
+      position: fixed;
+      top: 16px;
+      right: 16px;
+      background: var(--red);
+      color: var(--white);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      z-index: 100;
+    }
+
+    /* ── Logo lockup ────────────────────────────────────────────────── */
+    .logo-lockup {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+    }
+
+    .logo-lockup img {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      flex-shrink: 0;
+    }
+
+    .logo-lockup .divider {
+      width: 1px;
+      height: 48px;
+      background: rgba(255,255,255,0.15);
+      flex-shrink: 0;
+    }
+
+    .league-logo-wrap {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .league-logo-wrap img {
+      width: auto;
+      height: 64px;
+      max-width: 140px;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .league-initial {
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--gold);
+      flex-shrink: 0;
+    }
+
+    /* ── Header text ────────────────────────────────────────────────── */
+    .eyebrow {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: clamp(26px, 5vw, 34px);
+      font-weight: 900;
+      line-height: 1.15;
+      text-align: center;
+      margin-bottom: 16px;
+    }
+
+    .league-name-highlight { color: var(--gold); }
+
+    .subhead {
+      font-size: 16px;
+      color: var(--gray);
+      text-align: center;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .custom-message {
+      font-size: 15px;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      font-style: italic;
+      margin-bottom: 32px;
+      padding: 12px 20px;
+      border-left: 3px solid var(--gold);
+      background: rgba(245,166,35,0.06);
+      border-radius: 0 8px 8px 0;
+      text-align: left;
+    }
+
+    /* ── Value props ────────────────────────────────────────────────── */
+    .features {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 32px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px;
+      background: var(--navy);
+      border-radius: 12px;
+    }
+
+    .feature-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .feature-text strong {
+      display: block;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .feature-text span {
+      font-size: 13px;
+      color: var(--gray);
+      line-height: 1.4;
+    }
+
+    /* ── Form ───────────────────────────────────────────────────────── */
+    .form-card {
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 28px 24px;
+      margin-bottom: 24px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--gray);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 10px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 16px;
+      background: var(--card);
+      border: 1.5px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      font-family: var(--font);
+      font-size: 16px;
+      color: var(--white);
+      margin-bottom: 14px;
+      transition: border-color 0.2s;
+      outline: none;
+      -webkit-appearance: none;
+    }
+
+    .form-input:focus {
+      border-color: var(--gold);
+    }
+
+    .form-input::placeholder {
+      color: var(--lgray);
+    }
+
+    .btn-claim {
+      width: 100%;
+      padding: 16px;
+      background: var(--gold);
+      color: var(--black);
+      font-family: var(--font);
+      font-size: 16px;
+      font-weight: 800;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.01em;
+    }
+
+    .btn-claim:hover:not(:disabled) {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    .btn-claim:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .fine-print {
+      font-size: 12px;
+      color: var(--lgray);
+      text-align: center;
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+
+    /* ── States ─────────────────────────────────────────────────────── */
+    .state { display: none; }
+    .state.active { display: block; }
+
+    /* Success */
+    .code-box {
+      background: var(--black);
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      padding: 28px 24px;
+      text-align: center;
+      margin: 24px 0;
+    }
+
+    .code-box .code-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+
+    .code-value {
+      font-size: 36px;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+      font-family: 'Courier New', monospace;
+      margin-bottom: 14px;
+      word-break: break-all;
+    }
+
+    .copy-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245,166,35,0.12);
+      border: 1px solid rgba(245,166,35,0.3);
+      color: var(--gold);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 8px 18px;
+      border-radius: 100px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .copy-btn:hover { background: rgba(245,166,35,0.2); }
+
+    .redemption-steps {
+      margin: 24px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .step {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .step:last-child { border-bottom: none; }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--black);
+      font-size: 13px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .step-text {
+      font-size: 15px;
+      color: var(--white);
+      line-height: 1.5;
+    }
+
+    .step-text a {
+      color: var(--gold);
+      font-weight: 600;
+    }
+
+    .appstore-btn {
+      display: block;
+      margin: 24px auto 0;
+      width: fit-content;
+    }
+
+    .appstore-btn img {
+      height: 44px;
+      width: auto;
+    }
+
+    /* Appstore badge inline SVG fallback */
+    .appstore-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--white);
+      color: var(--black);
+      padding: 10px 20px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .appstore-badge:hover { opacity: 0.9; color: var(--black); }
+
+    /* Error / warning states */
+    .alert {
+      background: rgba(204,0,0,0.1);
+      border: 1px solid rgba(204,0,0,0.3);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 14px;
+      color: #FF6B6B;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .alert-gold {
+      background: rgba(245,166,35,0.08);
+      border: 1px solid rgba(245,166,35,0.25);
+      color: var(--gold);
+    }
+
+    /* Full/waitlist state */
+    .waitlist-note {
+      font-size: 14px;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 16px;
+      line-height: 1.5;
+    }
+
+    /* Already-claimed state */
+    .already-claimed-note {
+      font-size: 14px;
+      color: var(--gray);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* Loading spinner */
+    .spinner {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(0,0,0,0.3);
+      border-top-color: #000;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      vertical-align: middle;
+      margin-right: 6px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* ── Footer ─────────────────────────────────────────────────────── */
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .footer p {
+      font-size: 13px;
+      color: var(--lgray);
+      margin-bottom: 6px;
+    }
+
+    .footer a { color: var(--gold); }
+
+    .wuh-logo-small {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .wuh-logo-small img {
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+    }
+
+    .wuh-logo-small span {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+    }
+  </style>
+</head>
+<body>
+
+<div class="sample-badge" id="sampleBadge">Sample Page</div>
+
+<div class="page">
+
+  <!-- ── Logo lockup ────────────────────────────────────────────────── -->
+  <div class="logo-lockup" id="logoLockup">
+    <div class="league-logo-wrap" id="leagueLogoWrap">
+      <!-- Populated by JS: either <img> or initial letter -->
+    </div>
+    <div class="divider" id="logoDivider"></div>
+    <img src="/assets/icon.png" alt="Walk-Up Hype" id="wuhLogo">
+  </div>
+
+  <!-- ── Loading state ───────────────────────────────────────────────── -->
+  <div class="state active" id="stateLoading">
+    <div style="text-align:center;padding:60px 0;">
+      <div class="spinner" style="width:32px;height:32px;border-width:3px;margin:0 auto 16px;display:block;"></div>
+      <p style="color:var(--gray);font-size:14px;">Loading...</p>
+    </div>
+  </div>
+
+  <!-- ── Not found state ─────────────────────────────────────────────── -->
+  <div class="state" id="stateNotFound">
+    <div class="alert" style="text-align:center;margin-top:40px;">
+      <strong>Link not found</strong><br>
+      This link doesn't look right. Contact your league director for the correct link.
+    </div>
+  </div>
+
+  <!-- ── Main claim state ────────────────────────────────────────────── -->
+  <div class="state" id="stateMain">
+    <p class="eyebrow" id="eyebrow">Free Premium Access</p>
+    <h1 id="headline">Your league is hooking up players this summer</h1>
+    <p class="subhead" id="subhead">
+      Claim your free premium access to Walk-Up Hype. No credit card. No auto-renew.
+      Expires after the season.
+    </p>
+    <div class="custom-message" id="customMessage" style="display:none;"></div>
+
+    <div class="features">
+      <div class="feature">
+        <div class="feature-icon">🎙️</div>
+        <div class="feature-text">
+          <strong>Neural PA Announcer Voice</strong>
+          <span>Choose from Big League Bill, Play by Play Pete, Dugout Donna, and more.
+            Each player gets their own intro.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">🎵</div>
+        <div class="feature-text">
+          <strong>Walk-Up Music</strong>
+          <span>Any song from Apple Music. Plays automatically with the announcement
+            when a player steps up to bat.</span>
+        </div>
+      </div>
+      <div class="feature">
+        <div class="feature-icon">⚾</div>
+        <div class="feature-text">
+          <strong>Live Game Mode</strong>
+          <span>Coaches run it from the dugout. Tap a player's name, the announcement
+            plays, the music kicks in. Big-league experience for youth players.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <label for="emailInput" class="form-label">Enter your email to claim your code</label>
+      <input
+        type="email"
+        id="emailInput"
+        class="form-input"
+        placeholder="you@example.com"
+        autocomplete="email"
+        inputmode="email"
+      >
+      <div class="alert" id="formError" style="display:none;"></div>
+      <button class="btn-claim" id="claimBtn" onclick="submitClaim()">
+        Claim Free Access
+      </button>
+      <p class="fine-print">
+        60 days of free premium access. No credit card required.
+        No auto-renew. Access expires at end of season.
+      </p>
+    </div>
+  </div>
+
+  <!-- ── Tournament full state ───────────────────────────────────────── -->
+  <div class="state" id="stateFull">
+    <div class="alert alert-gold" style="text-align:center;margin:40px 0 24px;">
+      <strong>All codes have been claimed</strong><br>
+      Enter your email and we'll let you know if more become available.
+    </div>
+    <div class="form-card">
+      <label for="waitlistEmail" class="form-label">Join the waitlist</label>
+      <input
+        type="email"
+        id="waitlistEmail"
+        class="form-input"
+        placeholder="you@example.com"
+        autocomplete="email"
+        inputmode="email"
+      >
+      <div class="alert" id="waitlistError" style="display:none;"></div>
+      <button class="btn-claim" id="waitlistBtn" onclick="submitWaitlist()">
+        Notify Me
+      </button>
+    </div>
+    <p class="waitlist-note">
+      You can also download Walk-Up Hype for free and try the basic version
+      while you wait.
+      <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910">Download here</a>
+    </p>
+  </div>
+
+  <!-- ── Waitlist confirmed state ────────────────────────────────────── -->
+  <div class="state" id="stateWaitlisted">
+    <div style="text-align:center;padding:40px 0;">
+      <div style="font-size:48px;margin-bottom:16px;">✅</div>
+      <h1 style="font-size:24px;margin-bottom:12px;">You're on the list</h1>
+      <p style="color:var(--gray);font-size:15px;">We'll email you if more codes become available.</p>
+    </div>
+  </div>
+
+  <!-- ── Success state ───────────────────────────────────────────────── -->
+  <div class="state" id="stateSuccess">
+    <div style="text-align:center;margin-bottom:24px;">
+      <div style="font-size:48px;margin-bottom:12px;">🎉</div>
+      <h1 style="font-size:28px;margin-bottom:8px;">You're in!</h1>
+      <p style="color:var(--gray);font-size:15px;" id="successSubhead">
+        Your code is below. We also emailed it to you.
+      </p>
+    </div>
+
+    <div class="code-box">
+      <div class="code-label">Your Free Access Code</div>
+      <div class="code-value" id="codeDisplay">------</div>
+      <button class="copy-btn" onclick="copyCode()">
+        <span id="copyIcon">📋</span>
+        <span id="copyLabel">Copy Code</span>
+      </button>
+    </div>
+
+    <div class="redemption-steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910"
+             target="_blank">Download Walk-Up Hype</a>
+          on the App Store
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          Open the app, tap <strong>Settings</strong>, then <strong>Redeem Code</strong>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          Enter the code above and enjoy the season
+        </div>
+      </div>
+    </div>
+
+    <div style="text-align:center;margin-top:28px;">
+      <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910"
+         target="_blank" class="appstore-badge">
+        <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
+          <path d="M15.5 11.5C15.5 9.5 16.75 7.75 18.5 7C17.75 5.75 16.25 5 14.75 5C13.25 5 12.25 5.75 11.5 5.75C10.75 5.75 9.5 5 8.25 5C5.75 5 3.5 7.25 3.5 10.75C3.5 12.75 4.25 15 5.25 16.5C6 17.75 6.75 18.75 7.75 18.75C8.75 18.75 9.25 18.25 10.5 18.25C11.75 18.25 12.25 18.75 13.25 18.75C14.25 18.75 15 17.75 15.75 16.5C16.25 15.75 16.5 15 16.75 14.25C15 13.5 15.5 11.5 15.5 11.5Z" fill="black"/>
+          <path d="M13.5 3.25C14.25 2.25 14.5 1 14.25 0C13 0.25 11.75 1 11 2C10.25 3 10 4.25 10.25 5.25C11.5 5.25 12.75 4.25 13.5 3.25Z" fill="black"/>
+        </svg>
+        Download on the App Store
+      </a>
+    </div>
+
+    <p style="text-align:center;font-size:13px;color:var(--lgray);margin-top:20px;">
+      Need help? Email <a href="mailto:support@walkuphype.com">support@walkuphype.com</a>
+    </p>
+  </div>
+
+  <!-- ── Footer ─────────────────────────────────────────────────────── -->
+  <div class="footer">
+    <div class="wuh-logo-small">
+      <img src="/assets/icon.png" alt="Walk-Up Hype">
+      <span>Walk-Up Hype</span>
+    </div>
+    <p><a href="https://walkuphype.com">walkuphype.com</a></p>
+    <p><a href="https://walkuphype.com/privacy.html">Privacy</a> &nbsp;·&nbsp;
+       <a href="https://walkuphype.com/terms.html">Terms</a></p>
+  </div>
+
+</div><!-- /page -->
+
+<script>
+  // ── Config ───────────────────────────────────────────────────────────────
+  // Update this URL after deploying the Worker
+  const WORKER_URL = "https://walkuphype-promo.YOUR_SUBDOMAIN.workers.dev";
+
+  // ── State ────────────────────────────────────────────────────────────────
+  let currentSlug = "";
+  let currentCode = "";
+  let isSample    = false;
+
+  // ── Init ─────────────────────────────────────────────────────────────────
+  document.addEventListener("DOMContentLoaded", async () => {
+    const params = new URLSearchParams(window.location.search);
+    const slug   = (params.get("t") || "").toLowerCase().trim();
+
+    if (!slug) {
+      showState("stateNotFound");
+      return;
+    }
+
+    currentSlug = slug;
+    isSample    = slug === "sample";
+
+    if (isSample) {
+      document.getElementById("sampleBadge").style.display = "block";
+    }
+
+    // Fire PostHog page view
+    if (window.posthog) {
+      posthog.capture("promo_page_viewed", { tournament_slug: slug });
+    }
+
+    await loadTournament(slug);
+  });
+
+  // ── Load tournament metadata ─────────────────────────────────────────────
+  async function loadTournament(slug) {
+    try {
+      const res  = await fetch(`${WORKER_URL}/promo/tournament/${slug}`);
+      const data = await res.json();
+
+      if (!res.ok || data.error) {
+        showState("stateNotFound");
+        return;
+      }
+
+      renderTournament(data);
+
+      if (data.isFull) {
+        showState("stateFull");
+      } else {
+        showState("stateMain");
+      }
+    } catch (err) {
+      console.error("[Promo] Failed to load tournament:", err);
+      showState("stateNotFound");
+    }
+  }
+
+  // ── Render tournament data into the page ─────────────────────────────────
+  function renderTournament(t) {
+    const leagueName = t.name || "Your League";
+
+    // Headline
+    document.getElementById("headline").innerHTML =
+      `<span class="league-name-highlight">${leagueName}</span> is hooking up their players this summer`;
+
+    // Eyebrow — sport-aware
+    const sport = (t.sport || "baseball").toLowerCase();
+    const sportLabel = sport === "softball" ? "Softball" : "Baseball";
+    document.getElementById("eyebrow").textContent =
+      `${sportLabel} — Free Premium Access`;
+
+    // Subhead
+    if (t.directorName) {
+      document.getElementById("subhead").textContent =
+        `${t.directorName} has set up free premium access for ${leagueName} players. ` +
+        `No credit card. No auto-renew. Expires after the season.`;
+    }
+
+    // Custom message
+    if (t.customMessage) {
+      const el = document.getElementById("customMessage");
+      el.textContent = `"${t.customMessage}"`;
+      if (t.directorName) {
+        el.textContent += ` — ${t.directorName}`;
+      }
+      el.style.display = "block";
+    }
+
+    // Logo lockup
+    const leagueWrap = document.getElementById("leagueLogoWrap");
+    if (t.logoUrl) {
+      leagueWrap.innerHTML =
+        `<img src="${t.logoUrl}" alt="${leagueName} logo"
+              onerror="this.parentElement.innerHTML=makeInitial('${leagueName}')">`;
+    } else {
+      leagueWrap.innerHTML = makeInitial(leagueName);
+    }
+
+    // Page title
+    document.title = `${leagueName} — Free Walk-Up Hype Access`;
+  }
+
+  function makeInitial(name) {
+    const letter = (name || "?")[0].toUpperCase();
+    return `<div class="league-initial">${letter}</div>`;
+  }
+
+  // ── Claim ────────────────────────────────────────────────────────────────
+  async function submitClaim() {
+    const emailInput = document.getElementById("emailInput");
+    const email      = emailInput.value.trim();
+    const btn        = document.getElementById("claimBtn");
+    const errorEl    = document.getElementById("formError");
+
+    errorEl.style.display = "none";
+
+    if (!isValidEmail(email)) {
+      showError(errorEl, "Please enter a valid email address.");
+      emailInput.focus();
+      return;
+    }
+
+    // Sample mode — fake success, no real API call
+    if (isSample) {
+      showSuccess("SAMPLE-CODE", email);
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Claiming...';
+
+    if (window.posthog) {
+      posthog.capture("promo_email_submitted", { tournament_slug: currentSlug });
+    }
+
+    try {
+      const res  = await fetch(`${WORKER_URL}/promo/claim`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ email, slug: currentSlug })
+      });
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.error || "Something went wrong");
+      }
+
+      if (data.success) {
+        if (window.posthog) {
+          posthog.capture("promo_code_delivered", { tournament_slug: currentSlug });
+        }
+        showSuccess(data.code, email, data.alreadyClaimed);
+      } else if (data.reason === "tournament_full") {
+        if (window.posthog) {
+          posthog.capture("promo_waitlisted", { tournament_slug: currentSlug });
+        }
+        showState("stateFull");
+      } else {
+        throw new Error("Unexpected response");
+      }
+    } catch (err) {
+      showError(errorEl, err.message || "Something went wrong. Try again or email support@walkuphype.com");
+      btn.disabled = false;
+      btn.textContent = "Claim Free Access";
+    }
+  }
+
+  // ── Waitlist ─────────────────────────────────────────────────────────────
+  async function submitWaitlist() {
+    const emailInput = document.getElementById("waitlistEmail");
+    const email      = emailInput.value.trim();
+    const btn        = document.getElementById("waitlistBtn");
+    const errorEl    = document.getElementById("waitlistError");
+
+    errorEl.style.display = "none";
+
+    if (!isValidEmail(email)) {
+      showError(errorEl, "Please enter a valid email address.");
+      emailInput.focus();
+      return;
+    }
+
+    if (isSample) {
+      showState("stateWaitlisted");
+      return;
+    }
+
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span>Saving...';
+
+    // Re-use the claim endpoint — it captures to waitlist when full
+    try {
+      await fetch(`${WORKER_URL}/promo/claim`, {
+        method:  "POST",
+        headers: { "Content-Type": "application/json" },
+        body:    JSON.stringify({ email, slug: currentSlug })
+      });
+      showState("stateWaitlisted");
+    } catch {
+      showState("stateWaitlisted"); // graceful — don't block on error
+    }
+  }
+
+  // ── Success ──────────────────────────────────────────────────────────────
+  function showSuccess(code, email, alreadyClaimed = false) {
+    currentCode = code;
+    document.getElementById("codeDisplay").textContent = code;
+
+    if (alreadyClaimed) {
+      document.getElementById("successSubhead").textContent =
+        `You already claimed a code. We've re-sent it to ${email}.`;
+    } else {
+      document.getElementById("successSubhead").textContent =
+        `Your code is below. We also sent it to ${email}.`;
+    }
+
+    showState("stateSuccess");
+  }
+
+  // ── Copy code ────────────────────────────────────────────────────────────
+  function copyCode() {
+    if (!currentCode) return;
+    navigator.clipboard.writeText(currentCode).then(() => {
+      document.getElementById("copyIcon").textContent  = "✅";
+      document.getElementById("copyLabel").textContent = "Copied!";
+      setTimeout(() => {
+        document.getElementById("copyIcon").textContent  = "📋";
+        document.getElementById("copyLabel").textContent = "Copy Code";
+      }, 2500);
+    });
+  }
+
+  // ── Helpers ──────────────────────────────────────────────────────────────
+  function showState(id) {
+    document.querySelectorAll(".state").forEach(el => el.classList.remove("active"));
+    document.getElementById(id).classList.add("active");
+  }
+
+  function showError(el, message) {
+    el.textContent = message;
+    el.style.display = "block";
+  }
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+</script>
+
+</body>
+</html>
