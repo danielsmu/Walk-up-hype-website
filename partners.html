@@ -770,10 +770,7 @@
     // Custom message
     if (t.customMessage) {
       const el = document.getElementById("customMessage");
-      el.textContent = `"${t.customMessage}"`;
-      if (t.directorName) {
-        el.textContent += ` — ${t.directorName}`;
-      }
+      el.textContent = t.customMessage;
       el.style.display = "block";
     }
 
