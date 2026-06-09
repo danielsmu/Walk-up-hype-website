@@ -517,7 +517,7 @@
 
   <!-- ── Main claim state ────────────────────────────────────────────── -->
   <div class="state" id="stateMain">
-    <p class="eyebrow" id="eyebrow">Free for your team</p>
+    <p class="eyebrow" id="eyebrow">A gift from your league</p>
     <h1 id="headline">Your league is giving every player a walk-up this summer</h1>
     <p class="subhead" id="subhead">
       Walk-Up Hype gives every kid a PA announcement and walk-up song -- just like the pros.
@@ -754,7 +754,7 @@
     const sport = (t.sport || "baseball").toLowerCase();
     const sportLabel = sport === "softball" ? "Softball" : "Baseball";
     document.getElementById("eyebrow").textContent =
-      `Free for your team — ${sportLabel}`;
+      `A gift from ${leagueName}`;
 
     // Subhead
     document.getElementById("subhead").textContent =
