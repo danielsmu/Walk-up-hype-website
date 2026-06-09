@@ -161,6 +161,61 @@
       text-align: left;
     }
 
+    /* ── Audio demo ─────────────────────────────────────────────────── */
+    .audio-demo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--navy);
+      border: 1px solid rgba(245,166,35,0.25);
+      border-radius: 14px;
+      padding: 16px 20px;
+      margin-bottom: 28px;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+    }
+
+    .audio-demo:hover {
+      border-color: rgba(245,166,35,0.5);
+      background: rgba(245,166,35,0.06);
+    }
+
+    .audio-play-btn {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+
+    .audio-play-btn:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+
+    .audio-play-btn svg {
+      margin-left: 2px; /* optical center for play triangle */
+    }
+
+    .audio-demo-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 2px;
+    }
+
+    .audio-demo-text span {
+      font-size: 12px;
+      color: var(--gray);
+    }
+
     /* ── Value props ────────────────────────────────────────────────── */
     .features {
       display: flex;
@@ -525,32 +580,45 @@
     </p>
     <div class="custom-message" id="customMessage" style="display:none;"></div>
 
+    <!-- Audio demo -->
+    <div class="audio-demo" onclick="toggleDemo()" id="audioDemoRow">
+      <button class="audio-play-btn" id="playBtn" aria-label="Play sample announcement">
+        <svg id="playIcon" width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <polygon points="4,2 16,9 4,16" fill="#000000"/>
+        </svg>
+      </button>
+      <div class="audio-demo-text">
+        <strong>Hear what it sounds like</strong>
+        <span id="demoLabel">Sample PA announcement -- tap to play</span>
+      </div>
+    </div>
+    <audio id="demoAudio" src="AUDIO_URL_HERE" preload="none"></audio>
+
     <div class="features">
       <div class="feature">
         <div class="feature-icon">🎙️</div>
         <div class="feature-text">
-          <strong>Stadium-Quality PA Announcer Voices</strong>
-          <span>Choose from Big League Bill, Play by Play Pete, Ringside Randy, Dugout Donna,
-            and Coach Carlos. Each player gets their own personalized intro -- name, number,
-            position, nickname. Sounds like the real thing.</span>
+          <strong>Your kid gets a real PA announcement</strong>
+          <span>Their name, number, and position called out just like the pros.
+            Six neural announcer voices to pick from -- each one sounds like
+            the real thing.</span>
         </div>
       </div>
       <div class="feature">
         <div class="feature-icon">🎵</div>
         <div class="feature-text">
-          <strong>Walk-Up Music from Apple Music or Your Library</strong>
-          <span>Any song from Apple Music, or pick straight from the music already on your
-            phone. Set the exact start point. The announcement fires first, then the
-            music kicks in automatically.</span>
+          <strong>Their walk-up song, their choice</strong>
+          <span>Any song from Apple Music or already on their phone.
+            Set the exact moment it hits. The announcement fires first,
+            then the music kicks in automatically.</span>
         </div>
       </div>
       <div class="feature">
         <div class="feature-icon">⚾</div>
         <div class="feature-text">
-          <strong>Game Mode -- Built for the Dugout</strong>
-          <span>Coach taps a player's name, announcement plays, music starts. That's it.
-            Works offline, survives bad cell service, runs on one phone.
-            Every kid gets their big-league moment.</span>
+          <strong>Built for the dugout</strong>
+          <span>Coach taps a name, it plays. Works offline, survives bad
+            cell service, runs on one phone. No setup at the field.</span>
         </div>
       </div>
     </div>
@@ -910,6 +978,29 @@
         document.getElementById("copyLabel").textContent = "Copy Code";
       }, 2500);
     });
+  }
+
+  // ── Audio demo ───────────────────────────────────────────────────────────
+  function toggleDemo() {
+    const audio    = document.getElementById("demoAudio");
+    const playIcon = document.getElementById("playIcon");
+    const label    = document.getElementById("demoLabel");
+
+    if (audio.paused) {
+      audio.play();
+      // Swap to pause icon
+      playIcon.innerHTML = '<rect x="3" y="2" width="4" height="14" fill="#000000"/><rect x="11" y="2" width="4" height="14" fill="#000000"/>';
+      label.textContent = "Playing...";
+      audio.onended = () => {
+        playIcon.innerHTML = '<polygon points="4,2 16,9 4,16" fill="#000000"/>';
+        label.textContent = "Sample PA announcement -- tap to play";
+      };
+    } else {
+      audio.pause();
+      audio.currentTime = 0;
+      playIcon.innerHTML = '<polygon points="4,2 16,9 4,16" fill="#000000"/>';
+      label.textContent = "Sample PA announcement -- tap to play";
+    }
   }
 
   // ── Helpers ──────────────────────────────────────────────────────────────
