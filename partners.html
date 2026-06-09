@@ -517,11 +517,11 @@
 
   <!-- ── Main claim state ────────────────────────────────────────────── -->
   <div class="state" id="stateMain">
-    <p class="eyebrow" id="eyebrow">Free Premium Access</p>
-    <h1 id="headline">Your league is hooking up players this summer</h1>
+    <p class="eyebrow" id="eyebrow">Free for your team</p>
+    <h1 id="headline">Your league is giving every player a walk-up this summer</h1>
     <p class="subhead" id="subhead">
-      Claim your free premium access to Walk-Up Hype. No credit card. No auto-renew.
-      Expires after the season.
+      Walk-Up Hype gives every kid a PA announcement and walk-up song -- just like the pros.
+      Your league is covering it. No credit card. No auto-renew.
     </p>
     <div class="custom-message" id="customMessage" style="display:none;"></div>
 
@@ -556,7 +556,7 @@
     </div>
 
     <div class="form-card">
-      <label for="emailInput" class="form-label">Enter your email to claim your code</label>
+      <label for="emailInput" class="form-label">Enter your email to get your code</label>
       <input
         type="email"
         id="emailInput"
@@ -567,7 +567,7 @@
       >
       <div class="alert" id="formError" style="display:none;"></div>
       <button class="btn-claim" id="claimBtn" onclick="submitClaim()">
-        Get My Free Access
+        Get My Free Code
       </button>
       <p class="fine-print">
         60 days free. No credit card. No auto-renew.
@@ -748,24 +748,18 @@
 
     // Headline
     document.getElementById("headline").innerHTML =
-      `<span class="league-name-highlight">${leagueName}</span> is hooking up their players this summer`;
+      `<span class="league-name-highlight">${leagueName}</span> is giving every player a walk-up this summer`;
 
     // Eyebrow — sport-aware
     const sport = (t.sport || "baseball").toLowerCase();
     const sportLabel = sport === "softball" ? "Softball" : "Baseball";
     document.getElementById("eyebrow").textContent =
-      `${sportLabel} — Free Premium Access`;
+      `Free for your team — ${sportLabel}`;
 
     // Subhead
-    if (t.directorName) {
-      document.getElementById("subhead").textContent =
-        `${t.directorName} is giving ${leagueName} players free premium access this summer. ` +
-        `No credit card. No auto-renew. Just a big-league experience for every kid on the roster.`;
-    } else {
-      document.getElementById("subhead").textContent =
-        `${leagueName} is giving their players free premium access this summer. ` +
-        `No credit card. No auto-renew. Just a big-league experience for every kid on the roster.`;
-    }
+    document.getElementById("subhead").textContent =
+      `Walk-Up Hype gives every kid a PA announcement and walk-up song — just like the pros. ` +
+      `${leagueName} is covering it. No credit card. No auto-renew.`;
 
     // Custom message
     if (t.customMessage) {
