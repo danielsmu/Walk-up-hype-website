@@ -575,7 +575,7 @@
     <p class="eyebrow" id="eyebrow">A gift from your league</p>
     <h1 id="headline">Your league is giving every player a walk-up this summer</h1>
     <p class="subhead" id="subhead">
-      Walk-Up Hype gives every kid a PA announcement and walk-up song -- just like the pros.
+      Walk-Up Hype gives every kid a PA announcement and walk-up song, just like the pros.
       Your league is covering it. No credit card. No auto-renew.
     </p>
     <div class="custom-message" id="customMessage" style="display:none;"></div>
@@ -589,7 +589,7 @@
       </button>
       <div class="audio-demo-text">
         <strong>Hear what it sounds like</strong>
-        <span id="demoLabel">Sample PA announcement -- tap to play</span>
+        <span id="demoLabel">Sample PA announcement. Tap to play.</span>
       </div>
     </div>
     <audio id="demoAudio" src="/assets/preview_bigLeagueBill.mp3" preload="none"></audio>
@@ -600,7 +600,7 @@
         <div class="feature-text">
           <strong>Your kid gets a real PA announcement</strong>
           <span>Their name, number, and position called out just like the pros.
-            Six neural announcer voices to pick from -- each one sounds like
+            Six neural announcer voices to pick from, each one sounds like
             the real thing.</span>
         </div>
       </div>
@@ -639,7 +639,7 @@
       </button>
       <p class="fine-print">
         60 days free. No credit card. No auto-renew.
-        Access expires at end of season -- no surprise charges.
+        Access expires at end of season. No surprise charges..
       </p>
     </div>
   </div>
@@ -993,13 +993,13 @@
       label.textContent = "Playing...";
       audio.onended = () => {
         playIcon.innerHTML = '<polygon points="4,2 16,9 4,16" fill="#000000"/>';
-        label.textContent = "Sample PA announcement -- tap to play";
+        label.textContent = "Sample PA announcement. Tap to play.";
       };
     } else {
       audio.pause();
       audio.currentTime = 0;
       playIcon.innerHTML = '<polygon points="4,2 16,9 4,16" fill="#000000"/>';
-      label.textContent = "Sample PA announcement -- tap to play";
+      label.textContent = "Sample PA announcement. Tap to play.";
     }
   }
 
