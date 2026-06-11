@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(sips -z 256 256 \"/Users/danielmilner/Coding Projects/walk-up-hype-website/Walk-up-hype-website/assets/walkuphype1024.png\" --out \"/Users/danielmilner/Coding Projects/walk-up-hype-website/Walk-up-hype-website/assets/icon.png\")"
+    ]
+  }
+}

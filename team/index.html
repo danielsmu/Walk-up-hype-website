@@ -105,6 +105,7 @@
     .stepper button {
       width: 48px; height: 48px; border-radius: 12px; background: var(--card);
       color: var(--gold); font-size: 22px; font-weight: 700;
+      touch-action: manipulation;
     }
     .stepper input { text-align: center; max-width: 110px; }
     .check-row { display: flex; align-items: flex-start; gap: 10px; min-height: 44px; }
@@ -481,6 +482,9 @@
 
     function selectSong(s) {
       state.selected = s;
+      // Selecting a song means the parent is picking — uncheck skip
+      $("in-skip").checked = false;
+      $("song-card").style.opacity = "1";
       $("clean-helper").style.display = s.isExplicit ? "block" : "none";
       $("f-start").style.display = "block";
       $("results").classList.remove("show");
@@ -580,7 +584,19 @@
 
     $("in-skip").addEventListener("change", function () {
       $("song-card").style.opacity = this.checked ? "0.6" : "1";
-      if (this.checked) $("f-song").classList.remove("invalid");
+      if (this.checked) {
+        // Checking skip clears any selected song
+        state.selected = null;
+        state.startSec = 0;
+        $("in-start").value = "0:00";
+        $("f-start").style.display = "none";
+        $("clean-helper").style.display = "none";
+        $("results").classList.remove("show");
+        $("in-search").value = "";
+        if (state.audio) { state.audio.pause(); state.playingId = null; }
+        renderSelected();
+        $("f-song").classList.remove("invalid");
+      }
     });
 
     $("in-jersey").addEventListener("input", function () {
@@ -702,6 +718,7 @@
       $("in-jersey").value = "";
       $("in-pron").value = "";
       $("in-note").value = "";
+      $("in-note").textContent = "";  // belt-and-suspenders for Safari
       $("in-skip").checked = false;
       $("in-hide-explicit").checked = false;
       $("hide-explicit-row").style.display = "none";
