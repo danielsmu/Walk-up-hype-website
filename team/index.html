@@ -88,8 +88,9 @@
     .song-artist { font-size: 13px; color: var(--gray); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .song-album { font-size: 13px; color: var(--gold); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .badge-e {
-      display: inline-block; background: var(--red); color: #fff; font-size: 10px;
+      display: inline-block; background: var(--red); color: #fff; font-size: 9px;
       font-weight: 800; border-radius: 3px; padding: 1px 5px; margin-left: 6px; vertical-align: 1px;
+      letter-spacing: 0.5px;
     }
     .badge-c {
       display: inline-block; background: var(--green); color: #fff; font-size: 9px;
@@ -377,13 +378,16 @@
           var data = (j.results && j.results.songs && j.results.songs.data) || [];
           state.results = data.map(function (s) {
             var a = s.attributes;
+            var cr = a.contentRating || "";
             return {
               catalogId: String(s.id),
               title: a.name || "",
               artistName: a.artistName || "",
               albumName: a.albumName || "",
               durationMs: a.durationInMillis || 0,
-              isExplicit: a.contentRating === "explicit",
+              contentRating: cr,
+              isExplicit: cr === "explicit",
+              isClean: cr === "clean",
               artworkUrl: a.artwork ? a.artwork.url.replace("{w}", "120").replace("{h}", "120") : "",
               previewUrl: (a.previews && a.previews[0] && a.previews[0].url) || ""
             };
@@ -420,9 +424,9 @@
         if (s.isExplicit) {
           var e = document.createElement("span");
           e.className = "badge-e";
-          e.textContent = "E";
+          e.textContent = "EXPLICIT";
           t.appendChild(e);
-        } else {
+        } else if (s.isClean) {
           var c = document.createElement("span");
           c.className = "badge-c";
           c.textContent = "CLEAN";
@@ -504,8 +508,13 @@
       if (s.isExplicit) {
         var e = document.createElement("span");
         e.className = "badge-e";
-        e.textContent = "E";
+        e.textContent = "EXPLICIT";
         t.appendChild(e);
+      } else if (s.isClean) {
+        var c = document.createElement("span");
+        c.className = "badge-c";
+        c.textContent = "CLEAN";
+        t.appendChild(c);
       }
       var ar = document.createElement("div");
       ar.className = "song-artist";
