@@ -91,6 +91,11 @@
       display: inline-block; background: var(--red); color: #fff; font-size: 10px;
       font-weight: 800; border-radius: 3px; padding: 1px 5px; margin-left: 6px; vertical-align: 1px;
     }
+    .badge-c {
+      display: inline-block; background: var(--green); color: #fff; font-size: 9px;
+      font-weight: 800; border-radius: 3px; padding: 1px 5px; margin-left: 6px; vertical-align: 1px;
+      letter-spacing: 0.5px;
+    }
     .preview-btn {
       width: 44px; height: 44px; border-radius: 50%; background: #3A3A3C;
       color: var(--white); font-size: 16px; flex-shrink: 0;
@@ -166,38 +171,41 @@
           <input type="text" id="in-last" maxlength="30" autocomplete="off" placeholder="e.g. Kowalski">
           <p class="err-inline">Last name is required.</p>
         </div>
-        <div class="field" id="f-jersey">
+        <div class="field" id="f-pron">
+          <label for="in-pron">Pronunciation help</label>
+          <input type="text" id="in-pron" maxlength="60" autocomplete="off" placeholder="e.g. kuh-VAL-skee ROD-ri-gez">
+          <p class="hint">Optional. Write how the announcer should say their full name so it sounds right over the PA.</p>
+        </div>
+        <div class="field" id="f-jersey" style="margin-bottom:0">
           <label for="in-jersey">Jersey number</label>
           <input type="text" id="in-jersey" inputmode="numeric" maxlength="3" autocomplete="off" placeholder="e.g. 12">
           <p class="hint">Optional, but it helps the coach match the right player.</p>
           <p class="err-inline">Numbers only.</p>
-        </div>
-        <div class="field" id="f-pron" style="margin-bottom:0">
-          <label for="in-pron">How do you say their name?</label>
-          <input type="text" id="in-pron" maxlength="60" autocomplete="off" placeholder="Write it like it sounds, e.g. kuh-VAL-skee">
-          <p class="hint">Optional. The announcer will use this so the name sounds right.</p>
         </div>
       </div>
 
       <div class="card" id="song-card">
         <div class="field" id="f-song" style="margin-bottom:0">
           <label for="in-search">Walk-up song</label>
-          <input type="search" id="in-search" autocomplete="off" placeholder="Search Apple Music">
+          <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px">
+            <input type="search" id="in-search" autocomplete="off" placeholder="Search Apple Music" style="margin-bottom:0; flex:1">
+          </div>
+          <label class="check-row" id="hide-explicit-row" style="display:none; text-transform:none; letter-spacing:0; margin-bottom:8px">
+            <input type="checkbox" id="in-hide-explicit">
+            <span style="font-size:13px; color:var(--gray)">Hide explicit versions</span>
+          </label>
           <p class="err-inline" id="song-err">Pick a song or check "Let the coach pick."</p>
           <div class="results" id="results"></div>
-          <div id="explicit-bar" style="display:none; margin-top:8px">
-            <button type="button" class="btn-ghost" id="toggle-explicit">Show explicit versions</button>
-          </div>
           <div id="clean-helper" style="display:none; margin-top:8px">
             <p class="hint" style="margin:0 0 4px">That version is marked explicit.</p>
             <button type="button" class="btn-ghost" id="find-clean">Find clean version</button>
           </div>
           <div id="selected-wrap" style="display:none; margin-top:12px"></div>
-          <div class="preview-bar" id="preview-bar">
-            <span class="time" id="preview-time">0:00</span>
-            <div class="track"><div class="fill" id="preview-fill" style="width:0%"></div></div>
-            <span class="label">Preview</span>
-          </div>
+        </div>
+        <div class="preview-bar" id="preview-bar">
+          <span class="time" id="preview-time">0:00</span>
+          <div class="track"><div class="fill" id="preview-fill" style="width:0%"></div></div>
+          <span class="label">30s sample</span>
         </div>
         <div class="field" id="f-start" style="display:none; margin:18px 0 0">
           <label for="in-start">Start time (optional)</label>
@@ -258,7 +266,6 @@
     var state = {
       cryptoKey: null,
       results: [],
-      showExplicit: false,
       selected: null,
       startSec: 0,
       audio: null,
@@ -408,8 +415,10 @@
     function renderResults(list) {
       var box = $("results");
       box.innerHTML = "";
-      var visible = list.filter(function (s) { return state.showExplicit || !s.isExplicit; });
-      var hiddenExplicit = list.length - visible.length;
+      var hideExplicit = $("in-hide-explicit").checked;
+      var visible = hideExplicit ? list.filter(function (s) { return !s.isExplicit; }) : list;
+      var hasExplicit = list.some(function (s) { return s.isExplicit; });
+      $("hide-explicit-row").style.display = hasExplicit && list.length > 0 ? "flex" : "none";
       visible.forEach(function (s) {
         var row = document.createElement("button");
         row.type = "button";
@@ -427,6 +436,11 @@
           e.className = "badge-e";
           e.textContent = "E";
           t.appendChild(e);
+        } else {
+          var c = document.createElement("span");
+          c.className = "badge-c";
+          c.textContent = "CLEAN";
+          t.appendChild(c);
         }
         var ar = document.createElement("div");
         ar.className = "song-artist";
@@ -445,43 +459,42 @@
         row.addEventListener("click", function () { selectSong(s); });
         box.appendChild(row);
       });
-      $("explicit-bar").style.display = hiddenExplicit > 0 ? "block" : "none";
-      box.classList.toggle("show", visible.length > 0 || hiddenExplicit > 0);
+      box.classList.toggle("show", visible.length > 0);
     }
 
-    $("toggle-explicit").addEventListener("click", function () {
-      state.showExplicit = !state.showExplicit;
-      this.textContent = state.showExplicit ? "Hide explicit versions" : "Show explicit versions";
+    $("in-hide-explicit").addEventListener("change", function () {
       renderResults(state.results);
     });
 
     var previewTimer = null;
 
+    function updatePreviewBar() {
+      if (!state.audio) return;
+      var cur = state.audio.currentTime || 0;
+      var dur = state.audio.duration || 30;
+      var m = Math.floor(cur / 60);
+      var sec = Math.floor(cur % 60);
+      $("preview-time").textContent = m + ":" + ("0" + sec).slice(-2);
+      $("preview-fill").style.width = Math.min(100, (cur / dur) * 100) + "%";
+    }
+
     function togglePreview(s) {
       if (!s.previewUrl) return;
       if (state.playingId === s.catalogId) {
-        if (state.audio) state.audio.pause();
+        if (state.audio) { state.audio.pause(); state.audio.removeEventListener("timeupdate", updatePreviewBar); }
         state.playingId = null;
         clearInterval(previewTimer);
         $("preview-bar").className = "preview-bar";
       } else {
-        if (state.audio) state.audio.pause();
+        if (state.audio) { state.audio.pause(); state.audio.removeEventListener("timeupdate", updatePreviewBar); }
         clearInterval(previewTimer);
         state.audio = new Audio(s.previewUrl);
-        state.audio.play();
         state.playingId = s.catalogId;
         $("preview-bar").className = "preview-bar active";
         $("preview-time").textContent = "0:00";
         $("preview-fill").style.width = "0%";
-        previewTimer = setInterval(function () {
-          if (!state.audio) return;
-          var cur = state.audio.currentTime || 0;
-          var dur = state.audio.duration || 30;
-          var m = Math.floor(cur / 60);
-          var sec = Math.floor(cur % 60);
-          $("preview-time").textContent = m + ":" + ("0" + sec).slice(-2);
-          $("preview-fill").style.width = Math.min(100, (cur / dur) * 100) + "%";
-        }, 250);
+        state.audio.addEventListener("timeupdate", updatePreviewBar);
+        previewTimer = setInterval(updatePreviewBar, 250);
         state.audio.addEventListener("ended", function () {
           state.playingId = null;
           clearInterval(previewTimer);
@@ -489,6 +502,14 @@
           renderResults(state.results);
           renderSelected();
         });
+        var playPromise = state.audio.play();
+        if (playPromise && playPromise.catch) {
+          playPromise.catch(function () {
+            state.playingId = null;
+            clearInterval(previewTimer);
+            $("preview-bar").className = "preview-bar";
+          });
+        }
       }
       renderResults(state.results);
       renderSelected();
@@ -559,8 +580,7 @@
     $("find-clean").addEventListener("click", function () {
       var s = state.selected;
       if (!s) return;
-      state.showExplicit = false;
-      $("toggle-explicit").textContent = "Show explicit versions";
+      $("in-hide-explicit").checked = true;
       $("in-search").value = s.title + " " + s.artistName;
       search(s.title + " " + s.artistName);
       $("results").classList.add("show");
@@ -716,6 +736,8 @@
       $("in-pron").value = "";
       $("in-note").value = "";
       $("in-skip").checked = false;
+      $("in-hide-explicit").checked = false;
+      $("hide-explicit-row").style.display = "none";
       $("song-card").style.opacity = "1";
       state.selected = null;
       state.startSec = 0;
