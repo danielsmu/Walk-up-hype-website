@@ -124,15 +124,6 @@
       vertical-align: -3px; margin-right: 8px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .preview-bar {
-      display: none; margin-top: 10px; padding: 10px 12px;
-      background: var(--card); border-radius: 10px;
-    }
-    .preview-bar.active { display: flex; align-items: center; gap: 10px; }
-    .preview-bar .track { flex: 1; height: 4px; background: #3A3A3C; border-radius: 2px; overflow: hidden; }
-    .preview-bar .fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.3s linear; }
-    .preview-bar .time { font-size: 13px; color: var(--gray); min-width: 36px; text-align: right; font-variant-numeric: tabular-nums; }
-    .preview-bar .label { font-size: 12px; color: var(--lgray); }
   </style>
 </head>
 <body>
@@ -201,11 +192,6 @@
             <button type="button" class="btn-ghost" id="find-clean">Find clean version</button>
           </div>
           <div id="selected-wrap" style="display:none; margin-top:12px"></div>
-        </div>
-        <div class="preview-bar" id="preview-bar">
-          <span class="time" id="preview-time">0:00</span>
-          <div class="track"><div class="fill" id="preview-fill" style="width:0%"></div></div>
-          <span class="label">30s sample</span>
         </div>
         <div class="field" id="f-start" style="display:none; margin:18px 0 0">
           <label for="in-start">Start time (optional)</label>
@@ -466,50 +452,22 @@
       renderResults(state.results);
     });
 
-    var previewTimer = null;
-
-    function updatePreviewBar() {
-      if (!state.audio) return;
-      var cur = state.audio.currentTime || 0;
-      var dur = state.audio.duration || 30;
-      var m = Math.floor(cur / 60);
-      var sec = Math.floor(cur % 60);
-      $("preview-time").textContent = m + ":" + ("0" + sec).slice(-2);
-      $("preview-fill").style.width = Math.min(100, (cur / dur) * 100) + "%";
-    }
-
     function togglePreview(s) {
       if (!s.previewUrl) return;
       if (state.playingId === s.catalogId) {
-        if (state.audio) { state.audio.pause(); state.audio.removeEventListener("timeupdate", updatePreviewBar); }
+        if (state.audio) state.audio.pause();
         state.playingId = null;
-        clearInterval(previewTimer);
-        $("preview-bar").className = "preview-bar";
       } else {
-        if (state.audio) { state.audio.pause(); state.audio.removeEventListener("timeupdate", updatePreviewBar); }
-        clearInterval(previewTimer);
+        if (state.audio) state.audio.pause();
         state.audio = new Audio(s.previewUrl);
         state.playingId = s.catalogId;
-        $("preview-bar").className = "preview-bar active";
-        $("preview-time").textContent = "0:00";
-        $("preview-fill").style.width = "0%";
-        state.audio.addEventListener("timeupdate", updatePreviewBar);
-        previewTimer = setInterval(updatePreviewBar, 250);
         state.audio.addEventListener("ended", function () {
           state.playingId = null;
-          clearInterval(previewTimer);
-          $("preview-bar").className = "preview-bar";
           renderResults(state.results);
           renderSelected();
         });
-        var playPromise = state.audio.play();
-        if (playPromise && playPromise.catch) {
-          playPromise.catch(function () {
-            state.playingId = null;
-            clearInterval(previewTimer);
-            $("preview-bar").className = "preview-bar";
-          });
-        }
+        var p = state.audio.play();
+        if (p && p.catch) p.catch(function () { state.playingId = null; });
       }
       renderResults(state.results);
       renderSelected();
@@ -744,8 +702,6 @@
       $("in-start").value = "0:00";
       $("f-start").style.display = "none";
       $("clean-helper").style.display = "none";
-      $("preview-bar").className = "preview-bar";
-      clearInterval(previewTimer);
       renderSelected();
       show("screen-form");
       window.scrollTo(0, 0);
