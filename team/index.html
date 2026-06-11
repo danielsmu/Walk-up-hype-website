@@ -119,6 +119,15 @@
       vertical-align: -3px; margin-right: 8px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+    .preview-bar {
+      display: none; margin-top: 10px; padding: 10px 12px;
+      background: var(--card); border-radius: 10px;
+    }
+    .preview-bar.active { display: flex; align-items: center; gap: 10px; }
+    .preview-bar .track { flex: 1; height: 4px; background: #3A3A3C; border-radius: 2px; overflow: hidden; }
+    .preview-bar .fill { height: 100%; background: var(--gold); border-radius: 2px; transition: width 0.3s linear; }
+    .preview-bar .time { font-size: 13px; color: var(--gray); min-width: 36px; text-align: right; font-variant-numeric: tabular-nums; }
+    .preview-bar .label { font-size: 12px; color: var(--lgray); }
   </style>
 </head>
 <body>
@@ -152,6 +161,11 @@
           <input type="text" id="in-name" maxlength="30" autocomplete="off" placeholder="e.g. Sam">
           <p class="err-inline">First name is required.</p>
         </div>
+        <div class="field" id="f-last">
+          <label for="in-last">Last name</label>
+          <input type="text" id="in-last" maxlength="30" autocomplete="off" placeholder="e.g. Kowalski">
+          <p class="err-inline">Last name is required.</p>
+        </div>
         <div class="field" id="f-jersey">
           <label for="in-jersey">Jersey number</label>
           <input type="text" id="in-jersey" inputmode="numeric" maxlength="3" autocomplete="off" placeholder="e.g. 12">
@@ -179,6 +193,11 @@
             <button type="button" class="btn-ghost" id="find-clean">Find clean version</button>
           </div>
           <div id="selected-wrap" style="display:none; margin-top:12px"></div>
+          <div class="preview-bar" id="preview-bar">
+            <span class="time" id="preview-time">0:00</span>
+            <div class="track"><div class="fill" id="preview-fill" style="width:0%"></div></div>
+            <span class="label">Preview</span>
+          </div>
         </div>
         <div class="field" id="f-start" style="display:none; margin:18px 0 0">
           <label for="in-start">Start time (optional)</label>
@@ -436,18 +455,37 @@
       renderResults(state.results);
     });
 
+    var previewTimer = null;
+
     function togglePreview(s) {
       if (!s.previewUrl) return;
       if (state.playingId === s.catalogId) {
         if (state.audio) state.audio.pause();
         state.playingId = null;
+        clearInterval(previewTimer);
+        $("preview-bar").className = "preview-bar";
       } else {
         if (state.audio) state.audio.pause();
+        clearInterval(previewTimer);
         state.audio = new Audio(s.previewUrl);
         state.audio.play();
         state.playingId = s.catalogId;
+        $("preview-bar").className = "preview-bar active";
+        $("preview-time").textContent = "0:00";
+        $("preview-fill").style.width = "0%";
+        previewTimer = setInterval(function () {
+          if (!state.audio) return;
+          var cur = state.audio.currentTime || 0;
+          var dur = state.audio.duration || 30;
+          var m = Math.floor(cur / 60);
+          var sec = Math.floor(cur % 60);
+          $("preview-time").textContent = m + ":" + ("0" + sec).slice(-2);
+          $("preview-fill").style.width = Math.min(100, (cur / dur) * 100) + "%";
+        }, 250);
         state.audio.addEventListener("ended", function () {
           state.playingId = null;
+          clearInterval(previewTimer);
+          $("preview-bar").className = "preview-bar";
           renderResults(state.results);
           renderSelected();
         });
@@ -565,16 +603,21 @@
     $("in-name").addEventListener("input", function () {
       $("f-name").classList.remove("invalid");
     });
+    $("in-last").addEventListener("input", function () {
+      $("f-last").classList.remove("invalid");
+    });
 
     // ---------------- submit ----------------
 
     function buildPayload() {
       var name = $("in-name").value.trim();
+      var last = $("in-last").value.trim();
       var jersey = $("in-jersey").value.trim();
       var skip = $("in-skip").checked;
       var ok = true;
 
       if (!name || name.length > 30) { $("f-name").classList.add("invalid"); ok = false; }
+      if (!last || last.length > 30) { $("f-last").classList.add("invalid"); ok = false; }
       if (jersey && !/^\d{1,3}$/.test(jersey)) { $("f-jersey").classList.add("invalid"); ok = false; }
       if (!skip && !state.selected) { $("f-song").classList.add("invalid"); ok = false; }
       var startSec = state.startSec;
@@ -588,6 +631,7 @@
       var payload = {
         v: 1,
         playerFirstName: name,
+        playerLastName: last,
         jerseyNumber: jersey,
         pronunciation: $("in-pron").value.trim().slice(0, 60),
         skipSong: skip,
@@ -667,6 +711,7 @@
 
     $("btn-again").addEventListener("click", function () {
       $("in-name").value = "";
+      $("in-last").value = "";
       $("in-jersey").value = "";
       $("in-pron").value = "";
       $("in-note").value = "";
@@ -677,6 +722,8 @@
       $("in-start").value = "0:00";
       $("f-start").style.display = "none";
       $("clean-helper").style.display = "none";
+      $("preview-bar").className = "preview-bar";
+      clearInterval(previewTimer);
       renderSelected();
       show("screen-form");
       window.scrollTo(0, 0);
