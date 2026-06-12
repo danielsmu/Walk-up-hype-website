@@ -873,7 +873,7 @@
       }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (res) {
           if (res.ok) {
-            $("success-title").textContent = payload.playerFirstName + "\u2019s walkup is locked in.";
+            $("success-title").textContent = payload.playerFirstName + "\u2019s walkup song is locked in.";
             show("screen-success");
             if (window.posthog) posthog.capture("collab_form_submitted", {
               skip_song: payload.skipSong,
