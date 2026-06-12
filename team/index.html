@@ -266,6 +266,7 @@
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px">
             <input type="search" id="in-search" autocomplete="off" placeholder="Search Apple Music" style="margin-bottom:0; flex:1">
           </div>
+          <p style="font-size:11px; color:var(--lgray); margin:0 0 6px 2px;">&#9834; Content provided by <a href="https://music.apple.com" target="_blank" rel="noopener" style="color:var(--lgray); text-decoration:underline;">Apple&nbsp;Music</a></p>
           <label class="check-row" id="hide-explicit-row" style="display:none; text-transform:none; letter-spacing:0; margin-bottom:8px">
             <input type="checkbox" id="in-hide-explicit">
             <span style="font-size:13px; color:var(--gray)">Hide explicit versions</span>
@@ -370,7 +371,8 @@
       audio: null,
       playingId: null,
       musicToken: null,
-      turnstileToken: null
+      turnstileToken: null,
+      hasSearched: false
     };
 
     function $(id) { return document.getElementById(id); }
@@ -482,7 +484,10 @@
     });
 
     function search(term) {
-      if (window.posthog) posthog.capture("collab_song_searched");
+      if (!state.hasSearched) {
+        state.hasSearched = true;
+        if (window.posthog) posthog.capture("collab_song_searched");
+      }
       getMusicToken().then(function (token) {
         var url = "https://api.music.apple.com/v1/catalog/us/search?types=songs&limit=10&term=" +
           encodeURIComponent(term);
@@ -490,6 +495,7 @@
       }).then(function (r) { return r.json(); })
         .then(function (j) {
           var data = (j.results && j.results.songs && j.results.songs.data) || [];
+          $("song-err").textContent = "Pick a song or check \"Let the coach pick.\"";
           state.results = data.map(function (s) {
             var a = s.attributes;
             var cr = a.contentRating || "";
@@ -508,7 +514,11 @@
           });
           renderResults(state.results);
         })
-        .catch(function () { renderResults([]); });
+        .catch(function () {
+          $("song-err").textContent = "Song search isn\u2019t working right now. Try again in a moment.";
+          $("f-song").classList.add("invalid");
+          renderResults([]);
+        });
     }
 
     function fmtDur(ms) {
@@ -920,6 +930,8 @@
       $("in-hide-explicit").checked = false;
       $("hide-explicit-row").style.display = "none";
       $("song-card").style.opacity = "1";
+      $("song-err").textContent = "Pick a song or check \"Let the coach pick.\"";
+      $("f-song").classList.remove("invalid");
       state.selected = null;
       state.startSec = 0;
       $("in-start").value = "0:00";
@@ -928,6 +940,8 @@
       renderSelected();
       show("screen-form");
       window.scrollTo(0, 0);
+      state.hasSearched = false;
+      if (window.posthog) posthog.capture("collab_form_loaded");
     });
 
     // Privacy modal
