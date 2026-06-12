@@ -315,10 +315,9 @@
       <p class="sub center">Have another player? <button type="button" class="btn-ghost" id="btn-again" style="display:inline">Submit again</button></p>
 
       <div class="card" style="margin-top: 16px; text-align: center;">
-        <p style="font-size: 26px; margin-bottom: 8px;">&#127908;</p>
-        <p style="font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 6px;">Want to run the walkups yourself?</p>
-        <p style="font-size: 13px; color: var(--gray); margin-bottom: 14px;">Walk-Up Hype turns any phone into a stadium PA system. AI announcements, walk-up songs, between-innings playlists.</p>
-        <a id="cta-app-store" href="https://apps.apple.com/us/app/walk-up-hype/id6760152910" target="_blank" rel="noopener" class="btn-primary" style="display: block; text-decoration: none; text-align: center;">Get the Free App</a>
+        <p style="font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 6px;">Every team needs a backup DJ.</p>
+        <p style="font-size: 13px; color: var(--gray); margin-bottom: 14px;">Walk-Up Hype turns any phone into a stadium PA system with AI announcements and walk-up songs. It's free.</p>
+        <a id="cta-app-store" href="https://apps.apple.com/us/app/walk-up-hype/id6760152910" target="_blank" rel="noopener" class="btn-primary" style="display: flex; align-items: center; justify-content: center; text-decoration: none;">Download Walk-Up Hype</a>
       </div>
     </section>
   </main>
@@ -874,7 +873,7 @@
       }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); })
         .then(function (res) {
           if (res.ok) {
-            $("success-title").textContent = "Got it. " + payload.playerFirstName + " is ready for their moment.";
+            $("success-title").textContent = payload.playerFirstName + "\u2019s walkup is locked in.";
             show("screen-success");
             if (window.posthog) posthog.capture("collab_form_submitted", {
               skip_song: payload.skipSong,
