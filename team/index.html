@@ -527,6 +527,8 @@
     }
 
     function renderResults(list) {
+      // If a song is already selected, don't re-open the results panel.
+      if (state.selected) { $("results").classList.remove("show"); return; }
       var box = $("results");
       box.innerHTML = "";
       var hideExplicit = $("in-hide-explicit").checked;
