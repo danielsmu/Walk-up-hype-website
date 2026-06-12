@@ -334,10 +334,19 @@
     <div class="privacy-modal">
       <span class="lock-icon">&#128274;</span>
       <h2>Your privacy is real here.</h2>
-      <p><span class="highlight">Your submission is end-to-end encrypted.</span> The encryption key is built into the link your coach shared. Our server stores your response as an unreadable, encrypted blob. We literally cannot see what you type.</p>
-      <p><span class="highlight">Only your coach can read it.</span> The person who created this team link is the only one who can decrypt and view submissions. Nobody else, including us.</p>
-      <p><span class="highlight">Everything auto-deletes.</span> Submissions are automatically wiped from our servers after 30 days. Your coach imports them to their device, then the server copy is gone.</p>
-      <p><span class="highlight">No account. No tracking. No ads.</span> This form doesn't use cookies, doesn't track you across the web, and will never show you an ad. We don't sell or share any data. Period.</p>
+
+      <p><span class="highlight">End-to-end encryption.</span><br>
+      What that means: we can't read what you type. Your submission is encrypted on your device before it ever leaves, and only your coach can unlock it.</p>
+
+      <p><span class="highlight">No accounts. No personal data collected.</span><br>
+      What that means: we don't know who you are. No login, no email, no phone number. Just a name and a song.</p>
+
+      <p><span class="highlight">Auto-delete.</span><br>
+      What that means: everything is wiped from our servers after 30 days. Your coach saves what they need to their phone, then the server copy is gone.</p>
+
+      <p><span class="highlight">Anonymous analytics only.</span><br>
+      What that means: we track basic, anonymous usage like "how many people completed the form" so we can make it better. We never see names, songs, or anything you type. No ads. No data sales. Ever.</p>
+
       <button type="button" class="privacy-close" id="privacy-close">Got it</button>
     </div>
   </div>
@@ -414,7 +423,7 @@
         .then(function (j) {
           if (j.acceptsSubmissions) {
             if (j.teamDisplayName) {
-              $("form-title").textContent = "Pick a walk-up song for " + j.teamDisplayName + "!";
+              $("form-title").textContent = "Pick a walk-up song for the " + j.teamDisplayName + "!";
             }
             show("screen-form");
             if (window.posthog) posthog.capture("collab_form_loaded");
