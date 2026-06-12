@@ -7,6 +7,16 @@
   <meta name="description" content="Pick your player's walk-up song for game day.">
   <meta name="robots" content="noindex, nofollow">
   <link rel="icon" href="/assets/icon.png">
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init push capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_oMfY9ej7EfuQTDdnLDNtxcgZhyaKgr45NkZavYb8Rs6c', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+      disable_session_recording: true,
+      capture_pageview: true,
+      capture_pageleave: true
+    });
+  </script>
   <style>
     :root {
       --black:  #000000;
@@ -303,13 +313,20 @@
       <h1 class="center" id="success-title">Got it.</h1>
       <p class="sub center">Your coach will review and approve this before game day. Want to change the song? Just fill out the form again. The newest submission wins.</p>
       <p class="sub center">Have another player? <button type="button" class="btn-ghost" id="btn-again" style="display:inline">Submit again</button></p>
+
+      <div class="card" style="margin-top: 16px; text-align: center;">
+        <p style="font-size: 26px; margin-bottom: 8px;">&#127908;</p>
+        <p style="font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 6px;">Want to run the walkups yourself?</p>
+        <p style="font-size: 13px; color: var(--gray); margin-bottom: 14px;">Walk-Up Hype turns any phone into a stadium PA system. AI announcements, walk-up songs, between-innings playlists.</p>
+        <a id="cta-app-store" href="https://apps.apple.com/us/app/walk-up-hype/id6760152910" target="_blank" rel="noopener" class="btn-primary" style="display: block; text-decoration: none; text-align: center;">Get the Free App</a>
+      </div>
     </section>
   </main>
 
   <footer>
     Powered by Walk-Up Hype. Stadium announcements and walk-up songs for youth baseball and softball.
     <br>
-    <a class="store-badge" href="https://apps.apple.com/us/app/walk-up-hype/id6760152910">Get Walk-Up Hype on the App Store &rarr;</a>
+    <a class="store-badge" href="https://apps.apple.com/us/app/walk-up-hype/id6760152910" target="_blank" rel="noopener">Get Walk-Up Hype on the App Store &rarr;</a>
   </footer>
 
   <!-- Privacy modal -->
@@ -400,6 +417,7 @@
               $("form-title").textContent = "Pick a walk-up song for " + j.teamDisplayName + "!";
             }
             show("screen-form");
+            if (window.posthog) posthog.capture("collab_form_loaded");
             loadTurnstile();
             return;
           }
@@ -456,6 +474,7 @@
     });
 
     function search(term) {
+      if (window.posthog) posthog.capture("collab_song_searched");
       getMusicToken().then(function (token) {
         var url = "https://api.music.apple.com/v1/catalog/us/search?types=songs&limit=10&term=" +
           encodeURIComponent(term);
@@ -657,6 +676,7 @@
       $("results").classList.remove("show");
       $("in-search").value = "";
       $("f-song").classList.remove("invalid");
+      if (window.posthog) posthog.capture("collab_song_selected", { is_explicit: s.isExplicit });
       renderSelected();
     }
 
@@ -847,6 +867,12 @@
           if (res.ok) {
             $("success-title").textContent = "Got it. " + payload.playerFirstName + " is ready for their moment.";
             show("screen-success");
+            if (window.posthog) posthog.capture("collab_form_submitted", {
+              skip_song: payload.skipSong,
+              had_pronunciation: payload.pronunciation.length > 0,
+              had_note: payload.noteToCoach.length > 0,
+              had_jersey: payload.jerseyNumber.length > 0
+            });
             window.scrollTo(0, 0);
             return;
           }
@@ -900,12 +926,18 @@
     $("privacy-open").addEventListener("click", function (e) {
       e.preventDefault();
       $("privacy-overlay").classList.add("show");
+      if (window.posthog) posthog.capture("collab_privacy_opened");
     });
     $("privacy-close").addEventListener("click", function () {
       $("privacy-overlay").classList.remove("show");
     });
     $("privacy-overlay").addEventListener("click", function (e) {
       if (e.target === this) this.classList.remove("show");
+    });
+
+    // App Store CTA on success page
+    $("cta-app-store").addEventListener("click", function () {
+      if (window.posthog) posthog.capture("collab_app_cta_tapped");
     });
 
     boot();
