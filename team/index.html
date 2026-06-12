@@ -158,6 +158,43 @@
       vertical-align: -3px; margin-right: 8px;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
+    /* Privacy */
+    .privacy-link {
+      font-size: 13px; margin-bottom: 18px;
+    }
+    .privacy-link a {
+      color: var(--gold); text-decoration: none; font-weight: 600;
+    }
+    .privacy-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.75); align-items: center; justify-content: center;
+      padding: 16px;
+    }
+    .privacy-overlay.show { display: flex; }
+    .privacy-modal {
+      background: var(--navy); border-radius: var(--radius);
+      padding: 28px 24px; max-width: 440px; width: 100%;
+      max-height: 85vh; overflow-y: auto;
+    }
+    .privacy-modal h2 {
+      font-size: 20px; font-weight: 800; margin-bottom: 16px;
+      color: var(--white);
+    }
+    .privacy-modal p {
+      font-size: 14px; color: var(--gray); line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .privacy-modal .highlight {
+      color: var(--white); font-weight: 600;
+    }
+    .privacy-modal .lock-icon {
+      font-size: 32px; margin-bottom: 12px; display: block;
+    }
+    .privacy-close {
+      width: 100%; padding: 14px; border-radius: 12px; margin-top: 8px;
+      background: var(--card); color: var(--white); font-size: 15px;
+      font-weight: 600; cursor: pointer;
+    }
   </style>
 </head>
 <body>
@@ -185,8 +222,9 @@
 
     <!-- FORM -->
     <section id="screen-form" class="screen">
-      <h1 id="form-title">Submit a walk-up song</h1>
-      <p class="sub">Takes about a minute. No app needed. Your coach approves everything before game day.</p>
+      <h1 id="form-title">Pick a walk-up song!</h1>
+      <p class="sub">You've been invited to choose a walk-up song for your player. Takes about a minute. No app needed. Your coach approves everything before game day.</p>
+      <p class="privacy-link"><a href="#" id="privacy-open">We actually care about your privacy. Want to know how much?</a></p>
 
       <div class="card">
         <div class="field" id="f-name">
@@ -274,6 +312,19 @@
     <a class="store-badge" href="https://apps.apple.com/us/app/walk-up-hype/id6760152910">Get Walk-Up Hype on the App Store &rarr;</a>
   </footer>
 
+  <!-- Privacy modal -->
+  <div class="privacy-overlay" id="privacy-overlay">
+    <div class="privacy-modal">
+      <span class="lock-icon">&#128274;</span>
+      <h2>Your privacy is real here.</h2>
+      <p><span class="highlight">Your submission is end-to-end encrypted.</span> The encryption key is built into the link your coach shared. Our server stores your response as an unreadable, encrypted blob. We literally cannot see what you type.</p>
+      <p><span class="highlight">Only your coach can read it.</span> The person who created this team link is the only one who can decrypt and view submissions. Nobody else, including us.</p>
+      <p><span class="highlight">Everything auto-deletes.</span> Submissions are automatically wiped from our servers after 30 days. Your coach imports them to their device, then the server copy is gone.</p>
+      <p><span class="highlight">No account. No tracking. No ads.</span> This form doesn't use cookies, doesn't track you across the web, and will never show you an ad. We don't sell or share any data. Period.</p>
+      <button type="button" class="privacy-close" id="privacy-close">Got it</button>
+    </div>
+  </div>
+
   <script>
   (function () {
     "use strict";
@@ -346,7 +397,7 @@
         .then(function (j) {
           if (j.acceptsSubmissions) {
             if (j.teamDisplayName) {
-              $("form-title").textContent = "Submit a walk-up song for " + j.teamDisplayName;
+              $("form-title").textContent = "Pick a walk-up song for " + j.teamDisplayName + "!";
             }
             show("screen-form");
             loadTurnstile();
@@ -843,6 +894,18 @@
       renderSelected();
       show("screen-form");
       window.scrollTo(0, 0);
+    });
+
+    // Privacy modal
+    $("privacy-open").addEventListener("click", function (e) {
+      e.preventDefault();
+      $("privacy-overlay").classList.add("show");
+    });
+    $("privacy-close").addEventListener("click", function () {
+      $("privacy-overlay").classList.remove("show");
+    });
+    $("privacy-overlay").addEventListener("click", function (e) {
+      if (e.target === this) this.classList.remove("show");
     });
 
     boot();
