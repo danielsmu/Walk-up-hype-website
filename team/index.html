@@ -228,6 +228,9 @@
       <div class="big-icon">&#9918;</div>
       <h1 class="center" id="closed-title">Heads up</h1>
       <p class="sub center" id="closed-msg"></p>
+      <div id="retry-btn-wrap" style="display:none; text-align:center; margin-top:16px">
+        <button type="button" class="btn-primary" id="btn-retry" style="max-width:200px; margin:0 auto;">Try again</button>
+      </div>
     </section>
 
     <!-- FORM -->
@@ -398,8 +401,9 @@
 
     var CODE_RE = /^[0-9A-HJKMNP-TV-Z]{10}$/;
 
-    function closedScreen(msg) {
+    function closedScreen(msg, allowRetry) {
       $("closed-msg").textContent = msg;
+      $("retry-btn-wrap").style.display = allowRetry ? "block" : "none";
       show("screen-closed");
     }
 
@@ -411,14 +415,19 @@
         return;
       }
       crypto.subtle.importKey("raw", b64urlToBytes(keyB64), { name: "AES-GCM" }, false, ["encrypt"])
-        .then(function (k) { state.cryptoKey = k; return fetchStatus(); })
+        .then(function (k) { state.cryptoKey = k; return fetchStatus(2); })
         .catch(function () {
           $("explainer-msg").textContent = "This link is incomplete. Ask your coach to re-share it from the app.";
           show("screen-explainer");
         });
     }
 
-    function fetchStatus() {
+    $("btn-retry").addEventListener("click", function () {
+      show("screen-loading");
+      fetchStatus(2);
+    });
+
+    function fetchStatus(retries) {
       return fetch(API_BASE + "/v1/inbox/" + code + "/status")
         .then(function (r) { return r.json(); })
         .then(function (j) {
@@ -437,10 +446,14 @@
             expired: "This link has expired. Ask your coach to send a new one.",
             revoked: "This team's song collection is closed."
           };
-          closedScreen(msgs[j.status] || msgs.expired);
+          closedScreen(msgs[j.status] || msgs.expired, false);
         })
         .catch(function () {
-          closedScreen("Something went wrong on our end. Refresh to try again.");
+          if (retries > 0) {
+            return new Promise(function (res) { setTimeout(res, 1500); })
+              .then(function () { return fetchStatus(retries - 1); });
+          }
+          closedScreen("Something went wrong on our end.", true);
         });
     }
 
