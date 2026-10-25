@@ -3,9 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="AI-powered announcements and walk-up music for youth baseball &amp; softball. Built for the field." />
-  <title>Walk-Up Hype — AI Announcements for Youth Baseball &amp; Softball</title>
+  <meta name="description" content="Walk-up songs and stadium-style PA announcements for youth baseball &amp; softball. AI announcer voices, parents pick songs from a link, works offline. Free on iPhone, iPad and iPhone Duo." />
+  <title>Walk-Up Hype — Walk-Up Songs &amp; PA Announcer for Youth Baseball &amp; Softball</title>
+  <link rel="canonical" href="https://walkuphype.com/" />
   <link rel="icon" type="image/png" href="assets/icon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+  <meta name="apple-itunes-app" content="app-id=6760152910" />
+  <meta name="theme-color" content="#000000" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Walk-Up Hype" />
+  <meta property="og:url" content="https://walkuphype.com/" />
+  <meta property="og:title" content="Walk-Up Hype — Your kid's walk-up, done right." />
+  <meta property="og:description" content="A stadium announcer calls their name. Their walk-up song hits. Youth baseball &amp; softball, free on the App Store." />
+  <meta property="og:image" content="https://walkuphype.com/assets/og-image.png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Walk-Up Hype: Your kid's walk-up, done right." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:site" content="@walkuphype" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Walk-Up Hype",
+    "url": "https://walkuphype.com/",
+    "image": "https://walkuphype.com/assets/walkuphype1024.png",
+    "description": "Walk-up songs and AI PA announcements for youth baseball and softball.",
+    "operatingSystem": "iOS, iPadOS",
+    "applicationCategory": "SportsApplication",
+    "installUrl": "https://apps.apple.com/us/app/walk-up-hype/id6760152910",
+    "offers": [
+      { "@type": "Offer", "name": "Free", "price": "0", "priceCurrency": "USD" },
+      { "@type": "Offer", "name": "Premium (yearly)", "price": "9.99", "priceCurrency": "USD" }
+    ]
+  }
+  </script>
+
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="init push capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_oMfY9ej7EfuQTDdnLDNtxcgZhyaKgr45NkZavYb8Rs6c', {
+      api_host: 'https://us.i.posthog.com',
+      person_profiles: 'identified_only',
+      disable_session_recording: true,
+      capture_pageview: true,
+      capture_pageleave: true
+    });
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet" />
@@ -25,7 +70,8 @@
         <p class="hero-subhead">
           AI-powered announcements and walk-up music for youth baseball &amp; softball. Built for the field.
         </p>
-        <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910" class="btn-primary appstore-btn">Download on the App Store</a>
+        <p class="hero-devices">For iPhone, iPad &amp; iPhone Duo</p>
+        <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910?ct=web-hero" data-placement="web-hero" class="btn-primary appstore-btn">Download on the App Store</a>
         <p class="hero-footnote">7-day free trial &middot; $9.99/year &middot; free tier always available</p>
       </div>
       <div class="hero-video-wrap">
@@ -42,10 +88,10 @@
     <div class="section-inner">
       <p class="section-label">SEE IT IN ACTION</p>
       <div class="screenshots-row">
-        <img src="assets/walkuphype-02-game-mode.png" alt="Game Mode" class="screenshot" />
-        <img src="assets/walkuphype-01-roster.png" alt="Roster" class="screenshot" />
-        <img src="assets/walkuphype-05-pa-voices.png" alt="Premium AI Voices" class="screenshot" />
-        <img src="assets/walkuphype-04-between-innings.png" alt="Between Innings Music" class="screenshot" />
+        <img src="assets/walkuphype-02-game-mode.webp" alt="Game Mode" class="screenshot" width="660" height="1428" loading="lazy" decoding="async" />
+        <img src="assets/walkuphype-01-roster.webp" alt="Roster" class="screenshot" width="660" height="1428" loading="lazy" decoding="async" />
+        <img src="assets/walkuphype-05-pa-voices.webp" alt="Premium AI Voices" class="screenshot" width="660" height="1428" loading="lazy" decoding="async" />
+        <img src="assets/walkuphype-04-between-innings.webp" alt="Between Innings Music" class="screenshot" width="660" height="1428" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>
@@ -113,7 +159,7 @@
             <li>Between-innings music</li>
             <li>Game Mode</li>
           </ul>
-          <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910" class="btn-secondary">Download Free</a>
+          <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910?ct=web-pricing-free" data-placement="web-pricing-free" class="btn-secondary">Download Free</a>
         </div>
 
         <!-- Premium -->
@@ -126,7 +172,7 @@
             <li><span class="gold">✦</span> Unlimited teams &amp; players</li>
             <li><span class="gold">✦</span> Support a baseball dad who codes between innings</li>
           </ul>
-          <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910" class="btn-primary">Start Free Trial</a>
+          <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910?ct=web-pricing-premium" data-placement="web-pricing-premium" class="btn-primary">Start Free Trial</a>
         </div>
 
       </div>
@@ -167,6 +213,11 @@
         <details class="faq-item">
           <summary class="faq-q">Does it work offline or at fields with bad signal?</summary>
           <p class="faq-a">We built this for real fields, and real fields have terrible cell service. Walk-Up Hype has a "Save for Offline" feature that pre-generates every announcement for your entire roster and caches it to your device before you leave the house. Using songs from your phone's own library? Those are already offline-proof. Downloaded songs in Apple Music work great too. Either way, your whole game runs without a single bar of signal. Announcements fire, music kicks in, crowd goes wild. No Wi-Fi required.</p>
+        </details>
+
+        <details class="faq-item">
+          <summary class="faq-q">Does it work on iPad or iPhone Duo?</summary>
+          <p class="faq-a">Yes. Walk-Up Hype runs on iPhone, iPad, and iPhone Duo. On iPhone Duo, open it up and Game Mode puts your lineup and Between Innings side by side, so Now Batting and your playlist are on screen together. Fold or unfold mid-game and you stay right where you were.</p>
         </details>
 
         <details class="faq-item">
@@ -221,6 +272,12 @@
 
 
   <script>
+    document.querySelectorAll('a[href*="apps.apple.com"]').forEach(function (a) {
+      a.addEventListener('click', function () {
+        if (window.posthog) posthog.capture('appstore_clicked', { placement: a.dataset.placement || 'unknown' });
+      });
+    });
+
     (function () {
       var vid = document.querySelector('.promo-video');
       var btn = document.querySelector('.video-sound-btn');

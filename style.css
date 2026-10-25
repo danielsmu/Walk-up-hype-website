@@ -183,6 +183,15 @@ a:hover {
   margin-top: 12px;
 }
 
+.hero-devices {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: -8px 0 20px;
+}
+
 .hero-video-wrap {
   position: relative;
   width: 100%;
@@ -241,6 +250,7 @@ a:hover {
 
 .screenshot {
   width: 220px;
+  height: auto;
   flex-shrink: 0;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
