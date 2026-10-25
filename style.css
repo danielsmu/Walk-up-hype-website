@@ -119,6 +119,86 @@ a:hover {
   opacity: 1;
 }
 
+section[id] {
+  scroll-margin-top: 64px;
+}
+
+.section-title {
+  font-size: clamp(26px, 5vw, 36px);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  text-align: center;
+  margin: -24px auto 40px;
+  max-width: 640px;
+}
+
+/* ============================================================
+   NAV
+   ============================================================ */
+.site-nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.nav-inner {
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-weight: 700;
+  color: var(--white);
+  margin-right: auto;
+}
+
+.nav-brand img {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+}
+
+.nav-links {
+  display: none;
+  gap: 24px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.nav-links a {
+  color: var(--gray);
+}
+
+.nav-links a:hover {
+  color: var(--white);
+  opacity: 1;
+}
+
+.nav-cta {
+  background: var(--gold);
+  color: var(--black);
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border-radius: 999px;
+}
+
+.nav-cta:hover {
+  color: var(--black);
+}
+
 /* ============================================================
    HERO
    ============================================================ */
@@ -146,14 +226,6 @@ a:hover {
   text-align: center;
 }
 
-.hero-icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 16px;
-  margin-bottom: 24px;
-  object-fit: cover;
-}
-
 .hero-headline {
   font-size: clamp(36px, 9vw, 64px);
   font-weight: 900;
@@ -171,10 +243,43 @@ a:hover {
   max-width: 440px;
 }
 
-.appstore-btn {
-  /* Full width on mobile for a prominent tap target */
-  width: 100%;
-  max-width: 360px;
+.hero-cta {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.appstore-badge img {
+  width: 180px;
+  height: auto;
+}
+
+/* Desktop only: a phone can just tap the badge */
+.hero-qr {
+  display: none;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  line-height: 1.4;
+  color: var(--gray);
+}
+
+.hero-qr img {
+  width: 76px;
+  height: 76px;
+  border-radius: 8px;
+}
+
+.hero-rating {
+  font-size: 14px;
+  color: var(--white);
+  margin-top: 16px;
+}
+
+.stars {
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  margin-right: 4px;
 }
 
 .hero-footnote {
@@ -243,18 +348,178 @@ a:hover {
   display: flex;
   gap: 16px;
   overflow-x: auto;
-  justify-content: center;
   padding-bottom: 8px;
+  scroll-snap-type: x mandatory;
   -webkit-overflow-scrolling: touch;
 }
 
+/* Centered when it fits, scrollable from the first shot when it doesn't */
+.screenshot:first-child { margin-left: auto; }
+.screenshot:last-child { margin-right: auto; }
+
 .screenshot {
-  width: 220px;
+  width: 190px;
+  scroll-snap-align: center;
   height: auto;
   flex-shrink: 0;
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ============================================================
+   VOICES
+   ============================================================ */
+#voices {
+  background: var(--black);
+}
+
+.voices-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+}
+
+.voice-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  padding: 16px;
+  transition: border-color 0.2s;
+}
+
+.voice-card:has(.is-playing) {
+  border-color: var(--gold);
+  box-shadow: 0 0 20px rgba(245, 166, 35, 0.2);
+}
+
+.voice-portrait {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.voice-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.voice-text h3 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.voice-text p {
+  font-size: 13px;
+  color: var(--gray);
+  line-height: 1.4;
+}
+
+.voice-lang {
+  display: flex;
+  gap: 6px;
+}
+
+.voice-play {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.voice-play:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.voice-play.is-playing {
+  background: var(--gold);
+  color: var(--black);
+}
+
+/* Play triangle, or a stop square while playing */
+.voice-play-icon {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 8px 0 8px 13px;
+  border-color: transparent transparent transparent currentColor;
+  margin-left: 3px;
+}
+
+.voice-play.is-playing .voice-play-icon {
+  width: 12px;
+  height: 12px;
+  border: none;
+  background: currentColor;
+  border-radius: 2px;
+  margin-left: 0;
+}
+
+.voices-note {
+  font-size: 14px;
+  color: var(--gray);
+  text-align: center;
+  margin-top: 28px;
+}
+
+/* ============================================================
+   REVIEWS
+   ============================================================ */
+#reviews {
+  background: var(--navy);
+}
+
+.reviews-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.review-card {
+  background: var(--black);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.review-stars {
+  color: var(--gold);
+  letter-spacing: 0.1em;
+}
+
+.review-title {
+  font-weight: 700;
+}
+
+.review-card blockquote {
+  font-size: 15px;
+  color: var(--gray);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.review-card figcaption {
+  font-size: 13px;
+  color: var(--gray);
+  opacity: 0.8;
 }
 
 /* ============================================================
@@ -534,6 +799,18 @@ a:hover {
    RESPONSIVE — ≥ 768px (2-col grids, side-by-side cards)
    ============================================================ */
 @media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+  }
+
+  .voices-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .reviews-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .features-grid {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -570,6 +847,10 @@ a:hover {
 
   .hero-subhead {
     max-width: 100%;
+  }
+
+  .hero-qr {
+    display: flex;
   }
 
   .hero-video-wrap {

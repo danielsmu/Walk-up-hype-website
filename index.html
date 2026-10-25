@@ -58,11 +58,27 @@
 </head>
 <body>
 
+  <!-- ===================== NAV ===================== -->
+  <header class="site-nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-brand">
+        <img src="assets/icon.png" alt="" width="32" height="32" />
+        <span>Walk-Up Hype</span>
+      </a>
+      <nav class="nav-links" aria-label="Sections">
+        <a href="#voices">Voices</a>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <a href="https://apps.apple.com/app/apple-store/id6760152910?pt=128405385&amp;ct=walkuphype.com%20website&amp;mt=8" data-placement="nav" class="nav-cta">Get the app</a>
+    </div>
+  </header>
+
   <!-- ===================== HERO ===================== -->
   <section id="hero">
     <div class="hero-inner">
       <div class="hero-text">
-        <img src="assets/icon.png" alt="Walk-Up Hype app icon" class="hero-icon" onerror="this.style.display='none'" />
         <h1 class="hero-headline">
           YOUR KID'S WALK-UP,<br />
           <span class="gold">DONE RIGHT.</span>
@@ -71,7 +87,16 @@
           AI-powered announcements and walk-up music for youth baseball &amp; softball. Built for the field.
         </p>
         <p class="hero-devices">For iPhone, iPad &amp; iPhone Duo</p>
-        <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910?ct=web-hero" data-placement="web-hero" class="btn-primary appstore-btn">Download on the App Store</a>
+        <div class="hero-cta">
+          <a href="https://apps.apple.com/app/apple-store/id6760152910?pt=128405385&amp;ct=walkuphype.com%20website&amp;mt=8" data-placement="hero" class="appstore-badge">
+            <img src="assets/app-store-badge.svg" alt="Download on the App Store" width="180" height="60" />
+          </a>
+          <div class="hero-qr">
+            <img src="assets/qr-app-store.png" alt="QR code for Walk-Up Hype on the App Store" width="76" height="76" />
+            <span>On a computer?<br />Scan with your iPhone camera.</span>
+          </div>
+        </div>
+        <p class="hero-rating"><span class="stars" aria-hidden="true">★★★★★</span> 4.5 from 32 App Store ratings</p>
         <p class="hero-footnote">7-day free trial &middot; $9.99/year &middot; free tier always available</p>
       </div>
       <div class="hero-video-wrap">
@@ -83,15 +108,91 @@
     </div>
   </section>
 
+  <!-- ===================== VOICES ===================== -->
+  <section id="voices">
+    <div class="section-inner">
+      <p class="section-label">HEAR THE ANNOUNCERS</p>
+      <h2 class="section-title">Pick the voice that calls their name.</h2>
+      <div class="voices-grid">
+        <div class="voice-card">
+          <img src="assets/voices/bill.webp" alt="" class="voice-portrait" width="64" height="64" loading="lazy" />
+          <div class="voice-text">
+            <h3>Big League Bill</h3>
+            <p>Deep baritone, classic broadcast style</p>
+          </div>
+          <button class="voice-play" data-voice="bill" data-audio="assets/voices/preview_bigLeagueBill.mp3" aria-label="Play Big League Bill"><span class="voice-play-icon" aria-hidden="true"></span></button>
+        </div>
+        <div class="voice-card">
+          <img src="assets/voices/hank.webp" alt="" class="voice-portrait" width="64" height="64" loading="lazy" />
+          <div class="voice-text">
+            <h3>Hype Man Hank</h3>
+            <p>Smooth arena MC. Brings the whole crowd up.</p>
+          </div>
+          <button class="voice-play" data-voice="hank" data-audio="assets/voices/preview_hypeManHank.mp3" aria-label="Play Hype Man Hank"><span class="voice-play-icon" aria-hidden="true"></span></button>
+        </div>
+        <div class="voice-card">
+          <img src="assets/voices/pete.webp" alt="" class="voice-portrait" width="64" height="64" loading="lazy" />
+          <div class="voice-text">
+            <h3>Play by Play Pete</h3>
+            <p>High energy, play-by-play excitement</p>
+          </div>
+          <button class="voice-play" data-voice="pete" data-audio="assets/voices/preview_playByPlayPete.mp3" aria-label="Play Play by Play Pete"><span class="voice-play-icon" aria-hidden="true"></span></button>
+        </div>
+        <div class="voice-card">
+          <img src="assets/voices/randy.webp" alt="" class="voice-portrait" width="64" height="64" loading="lazy" />
+          <div class="voice-text">
+            <h3>Ringside Randy</h3>
+            <p>Big event drama, maximum hype</p>
+          </div>
+          <button class="voice-play" data-voice="randy" data-audio="assets/voices/preview_ringsideRandy.mp3" aria-label="Play Ringside Randy"><span class="voice-play-icon" aria-hidden="true"></span></button>
+        </div>
+        <div class="voice-card">
+          <img src="assets/voices/donna.webp" alt="" class="voice-portrait" width="64" height="64" loading="lazy" />
+          <div class="voice-text">
+            <h3>Dugout Donna</h3>
+            <p>Confident &amp; clear, commands the field</p>
+          </div>
+          <button class="voice-play" data-voice="donna" data-audio="assets/voices/preview_dugoutDonna.mp3" aria-label="Play Dugout Donna"><span class="voice-play-icon" aria-hidden="true"></span></button>
+        </div>
+        <div class="voice-card">
+          <img src="assets/voices/carlos.webp" alt="" class="voice-portrait" width="64" height="64" loading="lazy" />
+          <div class="voice-text">
+            <h3>Coach Carlos</h3>
+            <p>Two languages. Twice the hype.</p>
+          </div>
+          <div class="voice-lang"><button class="voice-play voice-play--lang" data-voice="carlos-en" data-audio="assets/voices/preview_coachCarlos_en.mp3" aria-label="Play Coach Carlos in English">EN</button><button class="voice-play voice-play--lang" data-voice="carlos-es" data-audio="assets/voices/preview_coachCarlos_es.mp3" aria-label="Play Coach Carlos in Spanish">ES</button></div>
+        </div>
+        <div class="voice-card">
+          <img src="assets/voices/sam.webp" alt="" class="voice-portrait" width="64" height="64" loading="lazy" />
+          <div class="voice-text">
+            <h3>Squeaky Sam</h3>
+            <p>Pure cartoon chaos. Moms will be filming this one.</p>
+          </div>
+          <button class="voice-play" data-voice="sam" data-audio="assets/voices/preview_squeakySam.mp3" aria-label="Play Squeaky Sam"><span class="voice-play-icon" aria-hidden="true"></span></button>
+        </div>
+        <div class="voice-card">
+          <img src="assets/voices/phil.webp" alt="" class="voice-portrait" width="64" height="64" loading="lazy" />
+          <div class="voice-text">
+            <h3>Pumpkin Phil</h3>
+            <p>Spooky storyteller with a jack-o'-lantern grin.</p>
+          </div>
+          <button class="voice-play" data-voice="phil" data-audio="assets/voices/preview_pumpkinPhil.mp3" aria-label="Play Pumpkin Phil"><span class="voice-play-icon" aria-hidden="true"></span></button>
+        </div>
+      </div>
+      <p class="voices-note">All eight come with Premium. The free tier includes two built-in voices, including <a href="minor-league-mike.html">Minor League Mike</a>.</p>
+    </div>
+  </section>
+
   <!-- ===================== SCREENSHOTS ===================== -->
   <section id="screenshots" class="screenshots-section">
     <div class="section-inner">
       <p class="section-label">SEE IT IN ACTION</p>
       <div class="screenshots-row">
-        <img src="assets/walkuphype-02-game-mode.webp" alt="Game Mode" class="screenshot" width="660" height="1428" loading="lazy" decoding="async" />
-        <img src="assets/walkuphype-01-roster.webp" alt="Roster" class="screenshot" width="660" height="1428" loading="lazy" decoding="async" />
-        <img src="assets/walkuphype-05-pa-voices.webp" alt="Premium AI Voices" class="screenshot" width="660" height="1428" loading="lazy" decoding="async" />
-        <img src="assets/walkuphype-04-between-innings.webp" alt="Between Innings Music" class="screenshot" width="660" height="1428" loading="lazy" decoding="async" />
+        <img src="assets/shot-onair.webp" alt="Game Mode: the active batter on air" class="screenshot" width="660" height="1431" loading="lazy" decoding="async" />
+        <img src="assets/shot-collab.webp" alt="Parents submit songs and you approve them" class="screenshot" width="660" height="1431" loading="lazy" decoding="async" />
+        <img src="assets/shot-yourmusic.webp" alt="Pick songs from Apple Music or your own library" class="screenshot" width="660" height="1431" loading="lazy" decoding="async" />
+        <img src="assets/shot-picks.webp" alt="Curated walk-up playlists" class="screenshot" width="660" height="1431" loading="lazy" decoding="async" />
+        <img src="assets/shot-between.webp" alt="Between-innings music" class="screenshot" width="660" height="1431" loading="lazy" decoding="async" />
       </div>
     </div>
   </section>
@@ -142,6 +243,34 @@
     </div>
   </section>
 
+  <!-- ===================== REVIEWS ===================== -->
+  <section id="reviews">
+    <div class="section-inner">
+      <p class="section-label">FROM THE DUGOUT</p>
+      <h2 class="section-title">Coaches and team DJs love it.</h2>
+      <div class="reviews-grid">
+        <figure class="review-card">
+          <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review-title">Next level</p>
+          <blockquote>&ldquo;This has been such a fun addition to our first grade baseball team&hellip; it&rsquo;s been so fun and given the boys confidence heading up to the plate.&rdquo;</blockquote>
+          <figcaption>Joshfortney, App Store review</figcaption>
+        </figure>
+        <figure class="review-card">
+          <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review-title">Everything and more!</p>
+          <blockquote>&ldquo;Everything you could want in a Walk-Up song app, this app has! &hellip; made my job as team DJ a million times easier!&rdquo;</blockquote>
+          <figcaption>Lauren Dial, App Store review</figcaption>
+        </figure>
+        <figure class="review-card">
+          <p class="review-stars" aria-label="5 out of 5 stars">★★★★★</p>
+          <p class="review-title">Best of these apps</p>
+          <blockquote>&ldquo;I&rsquo;ve tried several of these apps for fun and they were all pretty clunky. This one was really easy to use&hellip; Don&rsquo;t waste time on the others &ndash; start with this one.&rdquo;</blockquote>
+          <figcaption>Hodor?Hodor, App Store review</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
   <!-- ===================== PRICING ===================== -->
   <section id="pricing">
     <div class="section-inner">
@@ -159,7 +288,7 @@
             <li>Between-innings music</li>
             <li>Game Mode</li>
           </ul>
-          <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910?ct=web-pricing-free" data-placement="web-pricing-free" class="btn-secondary">Download Free</a>
+          <a href="https://apps.apple.com/app/apple-store/id6760152910?pt=128405385&amp;ct=walkuphype.com%20website&amp;mt=8" data-placement="pricing-free" class="btn-secondary">Download Free</a>
         </div>
 
         <!-- Premium -->
@@ -172,7 +301,7 @@
             <li><span class="gold">✦</span> Unlimited teams &amp; players</li>
             <li><span class="gold">✦</span> Support a baseball dad who codes between innings</li>
           </ul>
-          <a href="https://apps.apple.com/us/app/walk-up-hype/id6760152910?ct=web-pricing-premium" data-placement="web-pricing-premium" class="btn-primary">Start Free Trial</a>
+          <a href="https://apps.apple.com/app/apple-store/id6760152910?pt=128405385&amp;ct=walkuphype.com%20website&amp;mt=8" data-placement="pricing-premium" class="btn-primary">Start Free Trial</a>
         </div>
 
       </div>
@@ -280,10 +409,37 @@
 
     (function () {
       var vid = document.querySelector('.promo-video');
+      var audio = null, current = null;
+      function stop() {
+        if (audio) audio.pause();
+        if (current) current.classList.remove('is-playing');
+        audio = null; current = null;
+      }
+      window.stopVoicePreview = stop;
+      document.querySelectorAll('.voice-play').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          if (current === btn) { stop(); return; }
+          stop();
+          if (vid) vid.muted = true;
+          var soundBtn = document.querySelector('.video-sound-btn');
+          if (soundBtn) soundBtn.innerHTML = '🔇';
+          audio = new Audio(btn.dataset.audio);
+          current = btn;
+          btn.classList.add('is-playing');
+          audio.addEventListener('ended', stop);
+          audio.play().catch(stop);
+          if (window.posthog) posthog.capture('voice_preview_played', { voice: btn.dataset.voice });
+        });
+      });
+    })();
+
+    (function () {
+      var vid = document.querySelector('.promo-video');
       var btn = document.querySelector('.video-sound-btn');
       if (!vid || !btn) return;
       btn.addEventListener('click', function () {
         vid.muted = !vid.muted;
+        if (!vid.muted && window.stopVoicePreview) window.stopVoicePreview();
         btn.innerHTML = vid.muted ? '🔇' : '🔊';
       });
     })();
