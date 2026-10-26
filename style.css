@@ -478,6 +478,57 @@ section[id] {
 }
 
 /* ============================================================
+   DEVICES
+   ============================================================ */
+#devices {
+  background: var(--black);
+}
+
+.devices-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+.device-card {
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.device-card img {
+  width: 100%;
+  height: auto;
+}
+
+.device-card figcaption {
+  padding: 20px 24px 24px;
+}
+
+.device-card h3 {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.device-card p,
+.devices-note {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+.devices-note {
+  text-align: center;
+  margin-top: 28px;
+}
+
+.devices-note strong {
+  color: var(--white);
+}
+
+/* ============================================================
    REVIEWS
    ============================================================ */
 #reviews {
@@ -809,6 +860,10 @@ section[id] {
 
   .reviews-grid {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .devices-grid {
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .features-grid {
