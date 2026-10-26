@@ -371,7 +371,7 @@ section[id] {
    VOICES
    ============================================================ */
 #voices {
-  background: var(--black);
+  background: var(--navy);
 }
 
 .voices-grid {
@@ -384,7 +384,7 @@ section[id] {
   display: flex;
   align-items: center;
   gap: 16px;
-  background: var(--navy);
+  background: var(--black);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
   padding: 16px;
@@ -477,6 +477,84 @@ section[id] {
   margin-top: 28px;
 }
 
+.section-sub {
+  font-size: 16px;
+  color: var(--gray);
+  text-align: center;
+  max-width: 560px;
+  margin: -24px auto 40px;
+}
+
+/* ============================================================
+   PARENTS PICK
+   ============================================================ */
+#parents-pick {
+  background: var(--black);
+}
+
+.steps {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+}
+
+.step {
+  background: var(--navy);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+}
+
+.step-num {
+  display: block;
+  font-size: 32px;
+  font-weight: 900;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+
+.step h3 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.step p,
+.steps-note {
+  font-size: 14px;
+  color: var(--gray);
+  line-height: 1.5;
+}
+
+.steps-note {
+  text-align: center;
+  margin-top: 28px;
+}
+
+/* ============================================================
+   FOUNDER
+   ============================================================ */
+#founder {
+  background: var(--navy);
+}
+
+.founder-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.founder-text {
+  font-size: 17px;
+  color: var(--gray);
+  line-height: 1.7;
+  max-width: 640px;
+  margin-bottom: 32px;
+}
+
 /* ============================================================
    DEVICES
    ============================================================ */
@@ -532,7 +610,7 @@ section[id] {
    REVIEWS
    ============================================================ */
 #reviews {
-  background: var(--navy);
+  background: var(--black);
 }
 
 .reviews-grid {
@@ -542,7 +620,7 @@ section[id] {
 }
 
 .review-card {
-  background: var(--black);
+  background: var(--navy);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius);
   padding: 24px;
@@ -577,7 +655,7 @@ section[id] {
    FEATURES
    ============================================================ */
 #features {
-  background: var(--black);
+  background: var(--navy);
 }
 
 .features-grid {
@@ -587,7 +665,7 @@ section[id] {
 }
 
 .feature-card {
-  background: var(--navy);
+  background: var(--black);
   border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.06);
   padding: 28px 24px;
@@ -622,7 +700,7 @@ section[id] {
    PRICING
    ============================================================ */
 #pricing {
-  background: var(--black);
+  background: var(--navy);
 }
 
 .pricing-cards {
@@ -634,7 +712,7 @@ section[id] {
 }
 
 .pricing-card {
-  background: var(--navy);
+  background: var(--black);
   border-radius: var(--radius);
   border: 1px solid rgba(255, 255, 255, 0.08);
   padding: 36px 28px;
@@ -698,7 +776,7 @@ section[id] {
    FAQ
    ============================================================ */
 #faq {
-  background: var(--navy);
+  background: var(--black);
 }
 
 .faq-list {
@@ -864,6 +942,10 @@ section[id] {
 
   .devices-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .steps {
+    grid-template-columns: repeat(3, 1fr);
   }
 
   .features-grid {
